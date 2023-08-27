@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://ivjwuqdql7p3"]
+
+[ext_resource type="Script" path="res://Game/World/Player/Player.gd" id="1_hy8ex"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6cmj4"]
+radius = 48.0
+height = 228.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyskf"]
+bg_color = Color(0.584314, 0, 1, 1)
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.486275, 0, 0.831373, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_hy8ex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_6cmj4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -48.0
+offset_top = -116.0
+offset_right = 48.0
+offset_bottom = 117.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iyskf")

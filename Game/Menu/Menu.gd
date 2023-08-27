@@ -13,6 +13,8 @@ func connect_to_server() -> void:
 
 func start() -> void:
 	starting.emit()
+	Sync.singleplayer()
+	get_tree().change_scene_to_file("res://Game/World/Main.tscn")
 
 
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bri21h4okqijq"]
+
+[ext_resource type="Script" path="res://Game/Global/Sync/Sync.gd" id="1_jn0a0"]
+
+[node name="Sync" type="Node"]
+script = ExtResource("1_jn0a0")
+
+[node name="Players" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("res://Game/World/Player/Player.tscn")
+spawn_path = NodePath(".")

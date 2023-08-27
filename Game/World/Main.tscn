@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://ydu4iqbf4i7i"]
+
+[ext_resource type="Texture2D" uid="uid://5fb2bxhpfha5" path="res://Game/World/Ship/Dingy.png" id="1_jdn7e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t08px"]
+size = Vector2(594.731, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adiok"]
+size = Vector2(153.373, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s58j4"]
+size = Vector2(155.419, 20)
+
+[node name="Root" type="Node2D"]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.490196, 0.776471, 0.941176, 1)
+
+[node name="Ship" type="CharacterBody2D" parent="."]
+z_index = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Ship"]
+position = Vector2(25, -375)
+texture = ExtResource("1_jdn7e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
+position = Vector2(-30.2768, 41.667)
+rotation = 0.108154
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_t08px")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ship"]
+position = Vector2(425, -58)
+rotation = -0.871985
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_adiok")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Ship"]
+position = Vector2(316, 38)
+rotation = -0.577354
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_adiok")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ship"]
+position = Vector2(-348.49, -49.2081)
+rotation = -2.02628
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_s58j4")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = 20
+position = Vector2(1450, -8)
+color = Color(0.285156, 0.445313, 0.5625, 1)
+polygon = PackedVector2Array(-7732, 3, 6021, 1, 6025, 4105, -7725, 4106)
