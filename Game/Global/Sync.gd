@@ -14,6 +14,7 @@ func _ready() -> void:
 
 
 func start_server() -> void:
+	print("started server")
 	multiplayer.peer_connected.connect(player_connected)
 	multiplayer.peer_disconnected.connect(player_disconnected)
 	peer.create_server(PORT)
@@ -35,6 +36,7 @@ func connect_to(ip: String) -> void:
 
 
 func player_connected(id: int) -> void:
+	print("player connected")
 	rpc_id(id, &"connected", VERSION)
 
 
@@ -45,6 +47,7 @@ func connected(server_version: String) -> void:
 		return
 	
 	# Load world
+	print("connected")
 	
 	# Once loaded:
 	rpc_id(1, &"loaded")
@@ -53,12 +56,14 @@ func connected(server_version: String) -> void:
 
 func player_disconnected(id: int) -> void:
 	# Remove player
+	print("player disconnected")
 	
 	pass
 
 
-@rpc("call_remote", "authority", "reliable")
+@rpc("call_remote", "any_peer", "reliable")
 func loaded() -> void:
+	print("player loaded")
 	pass
 	
 	# Spawn player

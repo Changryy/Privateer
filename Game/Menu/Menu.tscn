@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://bcigcsexwvtis"]
+[gd_scene load_steps=3 format=3 uid="uid://bcigcsexwvtis"]
+
+[ext_resource type="Script" path="res://Game/Menu/Menu.gd" id="1_b8sr0"]
+[ext_resource type="Script" path="res://Game/Menu/StartButton.gd" id="2_x8jf4"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -7,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_b8sr0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -40,14 +44,19 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 12
 
-[node name="Button" type="Button" parent="CenterContainer/VBoxContainer2/VBoxContainer"]
+[node name="Singleplayer" type="Button" parent="CenterContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_type_variation = &"MainMenuButton"
 text = "Singleplayer"
+script = ExtResource("2_x8jf4")
 
-[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer2/VBoxContainer"]
+[node name="Multiplayer" type="Button" parent="CenterContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_type_variation = &"MainMenuButton"
 text = "Multiplayer"
+script = ExtResource("2_x8jf4")
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer2/VBoxContainer/Singleplayer" to="." method="start"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer2/VBoxContainer/Multiplayer" to="." method="connect_to_server"]
