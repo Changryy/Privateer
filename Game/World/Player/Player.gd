@@ -7,7 +7,6 @@ const JUMP_HEIGHT: float = 1_000
 
 
 
-
 func _physics_process(delta: float) -> void:
 	velocity.y += GRAVITY * delta
 	velocity.x = Input.get_axis("left", "right") * SPEED

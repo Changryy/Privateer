@@ -23,6 +23,7 @@ script = ExtResource("1_hy8ex")
 shape = SubResource("CapsuleShape2D_6cmj4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -189)
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = -48.0
