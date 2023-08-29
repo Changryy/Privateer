@@ -62,6 +62,7 @@ func sync(pos: Vector2, vel: Vector2) -> void:
 
 func die() -> void:
 	dead = true
+	if !is_multiplayer_authority(): return
 	Sync.peer.close()
 	OS.alert("You have dieded")
 	get_tree().quit()
