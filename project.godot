@@ -23,6 +23,11 @@ Sync="*res://Game/Global/Sync/Sync.tscn"
 World="*res://Game/Global/World.gd"
 Relay="*res://Game/Global/Relay.gd"
 
+[display]
+
+window/size/mode=2
+window/size/mode.debug=0
+
 [editor]
 
 naming/scene_name_casing=1
