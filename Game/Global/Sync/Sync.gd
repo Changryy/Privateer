@@ -1,7 +1,7 @@
 extends Node
 
 const VERSION := "0.1.0"
-const PORT: int = 8765
+const PORT: int = 9216 # 8765
 
 var peer := ENetMultiplayerPeer.new()
 var players := {}
@@ -29,6 +29,7 @@ func connect_to(ip: String) -> void:
 	if ip == "localhost": valid_ip = true
 	if ip.match("*?.?*"): valid_ip = true
 	if !valid_ip: return
+	print("Connecting")
 	
 	peer.create_client(ip, PORT)
 	multiplayer.multiplayer_peer = peer
@@ -40,6 +41,7 @@ func player_connected(id: int) -> void:
 
 @rpc("call_remote", "authority", "reliable")
 func connected(server_version: String, world_data: Dictionary) -> void:
+	print("Connected")
 	if server_version != VERSION:
 		peer.close()
 		return

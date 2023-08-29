@@ -50,7 +50,7 @@ func jump():
 
 
 
-func sync_player(pos: Vector2, vel: Vector2) -> void:
+func sync(pos: Vector2, vel: Vector2) -> void:
 	position = pos
 	velocity = vel
 
