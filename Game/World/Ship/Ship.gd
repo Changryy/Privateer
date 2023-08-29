@@ -3,22 +3,20 @@ class_name Ship
 
 
 
-var rotation_delta: float = 0
 var synced := false
 
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !is_multiplayer_authority(): return
-	rotation_delta = fmod(rotation_delta + delta, 1.5)
-	Relay.rpc("sync_ship", rotation_delta)
+	Relay.rpc("sync_ship", $"../Node2D/Ship".current_animation_position)
 
 
 
 func sync(rot: float) -> void:
 	if synced: return
+	print("Hello!")
 	synced = true
-	rotation_delta = rot
 	$"../Node2D/Ship".seek(rot)
 
 
