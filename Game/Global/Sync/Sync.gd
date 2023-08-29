@@ -1,7 +1,7 @@
 extends Node
 
 const VERSION := "0.1.0"
-const PORT: int = 9216 # 8765
+const PORT: int = 8765
 
 var peer := ENetMultiplayerPeer.new()
 var players := {}
