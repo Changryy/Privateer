@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn5yn84yfo7xf"]
+
+[ext_resource type="Script" path="res://Game/World/Ship/Ship.gd" id="1_03lvu"]
+[ext_resource type="Texture2D" uid="uid://dh2g4alt6akhp" path="res://Game/World/Ship/Dingy2.png" id="2_utcbh"]
+
+[node name="Ship" type="AnimatableBody2D"]
+z_index = 10
+collision_layer = 2
+script = ExtResource("1_03lvu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(25, -1439)
+texture = ExtResource("2_utcbh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 123)
+polygon = PackedVector2Array(-1576, -559, -1576, -357, -1468, -263, -1410, -171, -1374, -51, -1122, 99, -858, 193, 1, 262, 403, 267, 780, 243, 1082, 147, 1351, -19, 1612, -266, 1827, -553, 1572, -313, 1310, -65, 1065, 90, 769, 179, 386, 205, 1, 207, -855, 138, -1102, 54, -1336, -90, -1361, -197, -1411, -293, -1523, -381)

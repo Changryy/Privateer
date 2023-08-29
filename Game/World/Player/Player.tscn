@@ -1,35 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://ivjwuqdql7p3"]
+[gd_scene load_steps=13 format=3 uid="uid://ivjwuqdql7p3"]
 
 [ext_resource type="Script" path="res://Game/World/Player/Player.gd" id="1_hy8ex"]
+[ext_resource type="Texture2D" uid="uid://c8a36jdurxgs2" path="res://Game/World/Player/Dingy2Player.png" id="2_1m1qb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6cmj4"]
-radius = 48.0
-height = 228.0
+radius = 107.0
+height = 958.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyskf"]
-bg_color = Color(0.584314, 0, 1, 1)
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.486275, 0, 0.831373, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+[sub_resource type="Animation" id="Animation_h0vk4"]
+resource_name = "Walk"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50)]
+}
+
+[sub_resource type="Animation" id="Animation_ll7xs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pasgr"]
+_data = {
+"RESET": SubResource("Animation_ll7xs"),
+"Walk": SubResource("Animation_h0vk4")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mxjru"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xjejn"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rwfw0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvtf6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dote5"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5fyul"]
+states/Idle/node = SubResource("AnimationNodeAnimation_mxjru")
+states/Idle/position = Vector2(346, 103)
+states/Walk/node = SubResource("AnimationNodeAnimation_xjejn")
+states/Walk/position = Vector2(600, 103)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rwfw0"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_pvtf6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dote5")]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_hy8ex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -481)
 shape = SubResource("CapsuleShape2D_6cmj4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_1m1qb")
+offset = Vector2(150, -519)
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -189)
+position = Vector2(0, -607)
+zoom = Vector2(0.2, 0.2)
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -48.0
-offset_top = -116.0
-offset_right = 48.0
-offset_bottom = 117.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_iyskf")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pasgr")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+tree_root = SubResource("AnimationNodeStateMachine_5fyul")
+anim_player = NodePath("../AnimationPlayer")
+active = true

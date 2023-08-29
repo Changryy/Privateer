@@ -2,17 +2,19 @@ extends CharacterBody2D
 class_name Player
 
 
-const SPEED: float = 600
-const GRAVITY: float = 1_500
-const JUMP_HEIGHT: float = 1_000
+const SPEED: float = 1_500
+const GRAVITY: float = 4_000
+const JUMP_HEIGHT: float = 3_000
 
+
+@onready var animation: AnimationNodeStateMachinePlayback = %AnimationTree["parameters/playback"]
 
 var dead := false
 
 
 func _enter_tree() -> void:
 	if name.is_valid_int(): set_multiplayer_authority(name.to_int())
-	global_position = World.spawn_point
+	global_position = World.get_spawnpoint()
 
 
 func _ready() -> void:
@@ -31,6 +33,15 @@ func _physics_process(delta: float) -> void:
 	
 	if is_multiplayer_authority():
 		velocity.x = Input.get_axis("left", "right") * SPEED
+	
+	if velocity.x:
+		animation.travel("Walk")
+		if (velocity.x > 0) != %Sprite.flip_h:
+			%Sprite.flip_h = velocity.x > 0
+			%Sprite.offset.x = abs(%Sprite.offset.x) * -sign(velocity.x)
+	else:
+		animation.travel("Idle")
+	
 	
 	move_and_slide()
 	

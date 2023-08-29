@@ -1,17 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://ydu4iqbf4i7i"]
+[gd_scene load_steps=9 format=3 uid="uid://ydu4iqbf4i7i"]
 
-[ext_resource type="Script" path="res://Game/World/Ship/Ship.gd" id="1_1deby"]
-[ext_resource type="Texture2D" uid="uid://5fb2bxhpfha5" path="res://Game/World/Ship/Dingy.png" id="1_jdn7e"]
+[ext_resource type="PackedScene" uid="uid://bn5yn84yfo7xf" path="res://Game/World/Ship/Ship.tscn" id="1_cfj4t"]
 [ext_resource type="Texture2D" uid="uid://dqsgl7b4ohmgo" path="res://Game/World/Ocean/PrivateersConceptWater.png" id="2_l1nrt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t08px"]
-size = Vector2(594.731, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_adiok"]
-size = Vector2(153.373, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s58j4"]
-size = Vector2(155.419, 20)
+[sub_resource type="Animation" id="Animation_7mei0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1450, 27)]
+}
 
 [sub_resource type="Animation" id="Animation_4u36l"]
 resource_name = "Test"
@@ -30,25 +35,35 @@ tracks/0/keys = {
 "values": [1450.0, 649.0]
 }
 
-[sub_resource type="Animation" id="Animation_7mei0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Polygon2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1450, 27)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i1e0x"]
 _data = {
 "RESET": SubResource("Animation_7mei0"),
 "Test": SubResource("Animation_4u36l")
+}
+
+[sub_resource type="Animation" id="Animation_q54v6"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_olw34"]
@@ -78,31 +93,6 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6387, 1.5)
 }
 
-[sub_resource type="Animation" id="Animation_q54v6"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ipfr"]
 _data = {
 "RESET": SubResource("Animation_q54v6"),
@@ -123,42 +113,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.690719, 0.885804, 1, 1)
 
-[node name="Ship" type="AnimatableBody2D" parent="."]
-z_index = 10
-position = Vector2(0, -20.9212)
-rotation = -0.0146206
-collision_layer = 2
-script = ExtResource("1_1deby")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
-position = Vector2(-30.2768, 41.667)
-rotation = 0.108154
-shape = SubResource("RectangleShape2D_t08px")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ship"]
-position = Vector2(425, -58)
-rotation = -0.871985
-shape = SubResource("RectangleShape2D_adiok")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Ship"]
-position = Vector2(316, 38)
-rotation = -0.577354
-shape = SubResource("RectangleShape2D_adiok")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ship"]
-position = Vector2(-348.49, -49.2081)
-rotation = -2.02628
-shape = SubResource("RectangleShape2D_s58j4")
-
-[node name="Sprite2D" type="Sprite2D" parent="Ship"]
-position = Vector2(25, -375)
-texture = ExtResource("1_jdn7e")
+[node name="Ship" parent="." instance=ExtResource("1_cfj4t")]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 z_index = 20
 position = Vector2(1450, 27)
 color = Color(0.230469, 0.445313, 0.566406, 1)
-polygon = PackedVector2Array(-7732, 3, 6021, 1, 6025, 4105, -7725, 4106)
+polygon = PackedVector2Array(-8977, 3, 6158, 1, 6137, 4105, -8977, 4106)
 
 [node name="PrivateersConceptWater" type="Sprite2D" parent="Polygon2D"]
 z_index = -1
@@ -205,6 +166,104 @@ region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
 [node name="PrivateersConceptWater5" type="Sprite2D" parent="Polygon2D"]
 z_index = -1
 position = Vector2(-3009, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater8" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(4194, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater9" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(3394, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater10" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(4994, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater11" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(5794, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater12" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(6593, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater13" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(7393, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater14" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(2592, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater15" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(-7008, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater16" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(-7808, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater17" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(-6208, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater18" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(-5408, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater19" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(-4609, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater20" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(-3809, -32)
+texture = ExtResource("2_l1nrt")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater21" type="Sprite2D" parent="Polygon2D"]
+z_index = -1
+position = Vector2(-8610, -32)
 texture = ExtResource("2_l1nrt")
 region_enabled = true
 region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
