@@ -18,6 +18,7 @@ func start_server() -> void:
 	multiplayer.peer_disconnected.connect(player_disconnected)
 	peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
+	await World.load_world(World.get_data())
 	is_connected = true
 
 func is_server() -> bool:
@@ -29,7 +30,6 @@ func connect_to(ip: String) -> void:
 	if ip == "localhost": valid_ip = true
 	if ip.match("*?.?*"): valid_ip = true
 	if !valid_ip: return
-	print("Connecting")
 	
 	peer.create_client(ip, PORT)
 	multiplayer.multiplayer_peer = peer
@@ -41,7 +41,6 @@ func player_connected(id: int) -> void:
 
 @rpc("call_remote", "authority", "reliable")
 func connected(server_version: String, world_data: Dictionary) -> void:
-	print("Connected")
 	if server_version != VERSION:
 		peer.close()
 		return
@@ -66,25 +65,13 @@ func player_disconnected(id: int) -> void:
 func loaded() -> void:
 	var player := Preloads.player.instantiate()
 	player.name = str(multiplayer.get_remote_sender_id())
-	player.global_position.y = -100
 	%Players.add_child(player)
 
 
 
 func singleplayer() -> void:
 	var player := Preloads.player.instantiate()
-	player.global_position.y = -100
 	%Players.add_child(player)
-
-
-@rpc("any_peer", "call_local", "unreliable_ordered")
-func sync_player(position: Vector2, velocity: Vector2) -> void:
-	var player := get_player_by_id(multiplayer.get_remote_sender_id())
-	
-	if is_instance_valid(player):
-		player.sync(position, velocity)
-
-
 
 
 

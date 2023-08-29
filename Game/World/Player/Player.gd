@@ -12,6 +12,7 @@ const JUMP_HEIGHT: float = 1_000
 
 func _enter_tree() -> void:
 	if name.is_valid_int(): set_multiplayer_authority(name.to_int())
+	global_position = World.spawn_point
 
 
 func _ready() -> void:
@@ -33,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if is_multiplayer_authority():
-		Sync.rpc(&"sync_player", position, velocity)
+		Relay.rpc(&"sync_player", position, velocity)
 	
 	velocity.y += GRAVITY * delta
 

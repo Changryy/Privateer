@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 Preloads="*res://Game/Global/Preloads.gd"
 Sync="*res://Game/Global/Sync/Sync.tscn"
 World="*res://Game/Global/World.gd"
+Relay="*res://Game/Global/Relay.gd"
 
 [editor]
 
