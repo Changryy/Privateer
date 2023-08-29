@@ -50,19 +50,22 @@ func connected(server_version: String, world_data: Dictionary) -> void:
 	is_connected = true
 
 
+func get_player_by_id(id: int) -> Player:
+	return %Players.get_node_or_null(str(id)) as Player
+
 func player_disconnected(id: int) -> void:
-	# Remove player
-	print("player disconnected")
+	var player := get_player_by_id(id)
 	
-	pass
+	if is_instance_valid(player):
+		player.queue_free()
 
 
 @rpc("call_remote", "any_peer", "reliable")
 func loaded() -> void:
-	print("player loaded")
-	pass
-	
-	# Spawn player
+	var player := Preloads.player.instantiate()
+	player.name = str(multiplayer.get_remote_sender_id())
+	player.global_position.y = -100
+	%Players.add_child(player)
 
 
 
@@ -72,7 +75,12 @@ func singleplayer() -> void:
 	%Players.add_child(player)
 
 
-
+@rpc("any_peer", "call_local", "unreliable_ordered")
+func sync_player(position: Vector2, velocity: Vector2) -> void:
+	var player := get_player_by_id(multiplayer.get_remote_sender_id())
+	
+	if is_instance_valid(player):
+		player.sync(position, velocity)
 
 
 

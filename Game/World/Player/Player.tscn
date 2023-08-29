@@ -22,7 +22,8 @@ script = ExtResource("1_hy8ex")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_6cmj4")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -189)
 
 [node name="Panel" type="Panel" parent="."]
