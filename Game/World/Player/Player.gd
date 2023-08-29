@@ -3,8 +3,8 @@ class_name Player
 
 
 const SPEED: float = 1_500
-const GRAVITY: float = 4_000
-const JUMP_HEIGHT: float = 3_000
+const GRAVITY: float = 5_000
+const JUMP_HEIGHT: float = 4_000
 
 
 @onready var animation: AnimationNodeStateMachinePlayback = %AnimationTree["parameters/playback"]
@@ -34,11 +34,16 @@ func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
 		velocity.x = Input.get_axis("left", "right") * SPEED
 	
+	var walking := false
+	
 	if velocity.x:
-		animation.travel("Walk")
+		walking = is_on_floor()
 		if (velocity.x > 0) != %Sprite.flip_h:
 			%Sprite.flip_h = velocity.x > 0
 			%Sprite.offset.x = abs(%Sprite.offset.x) * -sign(velocity.x)
+	
+	if walking:
+		animation.travel("Walk")
 	else:
 		animation.travel("Idle")
 	
@@ -51,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y += GRAVITY * delta
 	
 	
-	if position.y > 500: die()
+	if position.y > 5_000: die()
 
 
 func _unhandled_input(event: InputEvent) -> void:
