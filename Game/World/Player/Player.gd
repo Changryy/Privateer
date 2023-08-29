@@ -80,7 +80,7 @@ func die() -> void:
 	dead = true
 	if !is_multiplayer_authority(): return
 	Sync.peer.close()
-	OS.alert("You have dieded")
+	OS.alert("Oopsie woopsie!!!\n*blushes adorably*\n\nYou have dieded vewy much~ UwU\n\nGoodbye adowable ✨fwuffball✨ :333")
 	get_tree().quit()
 
 

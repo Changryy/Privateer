@@ -9,7 +9,7 @@ height = 958.0
 
 [sub_resource type="Animation" id="Animation_h0vk4"]
 resource_name = "Walk"
-length = 0.3
+length = 0.2
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -19,7 +19,7 @@ tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -50)]
@@ -58,7 +58,6 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvtf6"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dote5"]
-xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5fyul"]
 states/Idle/node = SubResource("AnimationNodeAnimation_mxjru")
