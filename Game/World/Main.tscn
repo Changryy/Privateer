@@ -125,8 +125,8 @@ color = Color(0.690719, 0.885804, 1, 1)
 
 [node name="Ship" type="AnimatableBody2D" parent="."]
 z_index = 10
-position = Vector2(0, -12.5736)
-rotation = 0.0135457
+position = Vector2(0, -11.9281)
+rotation = -0.0125172
 collision_layer = 2
 script = ExtResource("1_1deby")
 

@@ -7,6 +7,7 @@ var rotation_delta: float = 0
 var synced := false
 
 
+
 func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 	rotation_delta = fmod(rotation_delta + delta, 1.5)
@@ -23,6 +24,7 @@ func sync(rot: float) -> void:
 
 
 func _ready() -> void:
+	World.ship = self
 	$"../Node2D/Ship".play("Test")
 	$"../Polygon2D/Ocean".play("Test")
 
