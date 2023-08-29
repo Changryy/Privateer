@@ -7,7 +7,7 @@ const GRAVITY: float = 1_500
 const JUMP_HEIGHT: float = 1_000
 
 
-
+var dead := false
 
 
 func _enter_tree() -> void:
@@ -26,6 +26,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if dead: return
 	velocity.y += GRAVITY * delta
 	
 	if is_multiplayer_authority():
@@ -37,7 +38,9 @@ func _physics_process(delta: float) -> void:
 		Relay.rpc(&"sync_player", position, velocity)
 	
 	velocity.y += GRAVITY * delta
-
+	
+	
+	if position.y > 500: die()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,6 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func jump():
+	if dead: return
 	if !is_on_floor(): return
 	velocity.y = -JUMP_HEIGHT
 
@@ -56,7 +60,11 @@ func sync(pos: Vector2, vel: Vector2) -> void:
 	velocity = vel
 
 
-
+func die() -> void:
+	dead = true
+	Sync.peer.close()
+	OS.alert("You have dieded")
+	get_tree().quit()
 
 
 

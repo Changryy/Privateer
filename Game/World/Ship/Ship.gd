@@ -15,7 +15,6 @@ func _process(_delta: float) -> void:
 
 func sync(rot: float) -> void:
 	if synced: return
-	print("Hello!")
 	synced = true
 	$"../Node2D/Ship".seek(rot)
 
