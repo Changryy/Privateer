@@ -4,44 +4,6 @@
 [ext_resource type="Script" path="res://Game/World/Root.gd" id="1_rlrb3"]
 [ext_resource type="Texture2D" uid="uid://dqsgl7b4ohmgo" path="res://Game/World/Ocean/PrivateersConceptWater.png" id="2_l1nrt"]
 
-[sub_resource type="Animation" id="Animation_7mei0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Polygon2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1450, 27)]
-}
-
-[sub_resource type="Animation" id="Animation_4u36l"]
-resource_name = "Test"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Polygon2D:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1450.0, 649.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1e0x"]
-_data = {
-"RESET": SubResource("Animation_7mei0"),
-"Test": SubResource("Animation_4u36l")
-}
-
 [sub_resource type="Animation" id="Animation_q54v6"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -100,6 +62,44 @@ _data = {
 "Test": SubResource("Animation_olw34")
 }
 
+[sub_resource type="Animation" id="Animation_7mei0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1450, 27)]
+}
+
+[sub_resource type="Animation" id="Animation_4u36l"]
+resource_name = "Test"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1450.0, 248.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1e0x"]
+_data = {
+"RESET": SubResource("Animation_7mei0"),
+"Test": SubResource("Animation_4u36l")
+}
+
 [node name="Root" type="Node2D"]
 script = ExtResource("1_rlrb3")
 metadata/_edit_horizontal_guides_ = []
@@ -121,6 +121,7 @@ animation = NodePath("../Node2D/Ship")
 [node name="Polygon2D" type="Polygon2D" parent="."]
 z_index = 20
 position = Vector2(1450, 27)
+scale = Vector2(1.5, 1.5)
 color = Color(0.230469, 0.445313, 0.566406, 1)
 polygon = PackedVector2Array(-17736, 3, 14794, 1, 14915, 18491, -17736, 18489)
 
@@ -418,12 +419,6 @@ texture = ExtResource("2_l1nrt")
 region_enabled = true
 region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
 
-[node name="Ocean" type="AnimationPlayer" parent="Polygon2D"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_i1e0x")
-}
-
 [node name="Node2D" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../Ship")
 update_scale = false
@@ -432,4 +427,9 @@ update_scale = false
 speed_scale = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_0ipfr")
+}
+
+[node name="Ocean" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i1e0x")
 }

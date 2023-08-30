@@ -1,11 +1,27 @@
-[gd_scene load_steps=13 format=3 uid="uid://ivjwuqdql7p3"]
+[gd_scene load_steps=14 format=3 uid="uid://ivjwuqdql7p3"]
 
 [ext_resource type="Script" path="res://Game/World/Player/Player.gd" id="1_hy8ex"]
 [ext_resource type="Texture2D" uid="uid://c8a36jdurxgs2" path="res://Game/World/Player/Dingy2Player.png" id="2_1m1qb"]
+[ext_resource type="Script" path="res://Game/World/Player/PlayerCamera.gd" id="3_8an37"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6cmj4"]
 radius = 107.0
 height = 958.0
+
+[sub_resource type="Animation" id="Animation_ll7xs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_h0vk4"]
 resource_name = "Walk"
@@ -23,21 +39,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -50)]
-}
-
-[sub_resource type="Animation" id="Animation_ll7xs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pasgr"]
@@ -85,7 +86,10 @@ offset = Vector2(150, -519)
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -607)
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.4, 0.4)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("3_8an37")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
