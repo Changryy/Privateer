@@ -18,7 +18,8 @@ position = Vector2(0, 123)
 polygon = PackedVector2Array(-1576, -559, -1576, -357, -1468, -263, -1410, -171, -1374, -51, -1122, 99, -858, 193, 1, 262, 403, 267, 780, 243, 1082, 147, 1351, -19, 1612, -266, 1827, -553, 1572, -313, 1310, -65, 1065, 90, 769, 179, 386, 205, 1, 207, -855, 138, -1102, 54, -1336, -90, -1361, -197, -1411, -293, -1523, -381)
 
 [node name="Helm" type="Area2D" parent="."]
+position = Vector2(-1333, -543)
 script = ExtResource("3_aewmn")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Helm"]
-polygon = PackedVector2Array(-1485, -621, -1225, -551, -1192, -481, -1272, -500, -1418, -471, -1437, -504, -1533, -554)
+polygon = PackedVector2Array(-152, -75, 107, -3, 138, 61, 58, 41, -82, 69, -106, 20, -152, 22, -196, -9, -200, -44)
