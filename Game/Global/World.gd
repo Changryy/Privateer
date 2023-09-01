@@ -1,5 +1,7 @@
 extends Node
 
+signal interaction(interacter: Player)
+
 
 var player: Player
 var ship: Ship
@@ -17,6 +19,5 @@ func load_world(_data: Dictionary) -> void:
 func get_spawnpoint() -> Vector2:
 	if is_instance_valid(spawnpoint): return spawnpoint.position
 	return Vector2.ZERO
-
 
 

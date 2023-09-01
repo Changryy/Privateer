@@ -74,7 +74,7 @@ floor_snap_length = 32.0
 script = ExtResource("1_hy8ex")
 metadata/_edit_horizontal_guides_ = []
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -481)
 shape = SubResource("CapsuleShape2D_6cmj4")
 

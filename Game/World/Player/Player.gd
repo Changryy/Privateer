@@ -9,6 +9,7 @@ const JUMP_HEIGHT: float = 4_000
 
 @onready var animation: AnimationNodeStateMachinePlayback = %AnimationTree["parameters/playback"]
 
+var interactables: Array[Interactable] = []
 var dead := false
 
 
@@ -62,6 +63,7 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if !is_multiplayer_authority(): return
 	if event.is_action_pressed("jump"): jump()
+	if event.is_action_pressed("interact"): interact()
 
 
 func jump():
@@ -83,5 +85,28 @@ func die() -> void:
 	OS.alert("Oopsie woopsie!!!\n*blushes adorably*\n\nYou have dieded vewy much~ UwU\n\nGoodbye adowable ✨fwuffball✨ :333")
 	get_tree().quit()
 
+
+func interact() -> void:
+	interactables.clear()
+	World.interaction.emit(self)
+	await get_tree().process_frame
+	
+	var closest_interactable: Interactable
+	var closest_distance: float = INF
+	
+	for object in interactables:
+		if !is_instance_valid(object): continue
+		var distance: float = global_position.distance_squared_to(object.global_position)
+		if distance > closest_distance: continue
+		
+		closest_distance = distance
+		closest_interactable = object
+	
+	if is_instance_valid(closest_interactable):
+		closest_interactable.interact(self)
+
+
+func set_state(_state_name: NodePath) -> void:
+	pass
 
 

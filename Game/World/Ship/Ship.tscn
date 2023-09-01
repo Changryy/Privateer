@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn5yn84yfo7xf"]
+[gd_scene load_steps=4 format=3 uid="uid://bn5yn84yfo7xf"]
 
 [ext_resource type="Script" path="res://Game/World/Ship/Ship.gd" id="1_03lvu"]
 [ext_resource type="Texture2D" uid="uid://dh2g4alt6akhp" path="res://Game/World/Ship/Dingy2.png" id="2_utcbh"]
+[ext_resource type="Script" path="res://Game/World/Interactables/Helm.gd" id="3_aewmn"]
 
 [node name="Ship" type="AnimatableBody2D"]
 z_index = 10
@@ -15,3 +16,9 @@ texture = ExtResource("2_utcbh")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 123)
 polygon = PackedVector2Array(-1576, -559, -1576, -357, -1468, -263, -1410, -171, -1374, -51, -1122, 99, -858, 193, 1, 262, 403, 267, 780, 243, 1082, 147, 1351, -19, 1612, -266, 1827, -553, 1572, -313, 1310, -65, 1065, 90, 769, 179, 386, 205, 1, 207, -855, 138, -1102, 54, -1336, -90, -1361, -197, -1411, -293, -1523, -381)
+
+[node name="Helm" type="Area2D" parent="."]
+script = ExtResource("3_aewmn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Helm"]
+polygon = PackedVector2Array(-1485, -621, -1225, -551, -1192, -481, -1272, -500, -1418, -471, -1437, -504, -1533, -554)
