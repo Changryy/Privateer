@@ -18,11 +18,11 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Preloads="*res://Game/Global/Preloads.gd"
-Sync="*res://Game/Global/Sync/Sync.tscn"
-World="*res://Game/Global/World.gd"
-Relay="*res://Game/Global/Relay.gd"
-Collision="*res://Game/Global/Collision.gd"
+Preloads="*res://Game/Global/Subsystems/Preloads.gd"
+Sync="*res://Game/Global/Subsystems/Sync/Sync.tscn"
+World="*res://Game/Global/Subsystems/World.gd"
+Relay="*res://Game/Global/Subsystems/Relay.gd"
+Collision="*res://Game/Global/Subsystems/Collision.gd"
 
 [display]
 

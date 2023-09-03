@@ -4,11 +4,11 @@ extends Node
 
 
 @rpc("any_peer", "call_remote", "unreliable_ordered")
-func sync_player(position: Vector2, velocity: Vector2) -> void:
+func sync_player(position: Vector2, velocity: Vector2, flip_h: bool) -> void:
 	var player: Player = Sync.get_player_by_id(multiplayer.get_remote_sender_id())
 	
 	if is_instance_valid(player):
-		player.sync(position, velocity)
+		player.sync(position, velocity, flip_h)
 
 
 

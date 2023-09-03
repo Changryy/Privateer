@@ -15,7 +15,7 @@ func interact(_player: Player) -> void: pass
 
 func register_interaction(player: Player) -> void:
 	if !is_instance_valid(player): return
-	if overlaps_body(player): player.interactables.append(self)
+	if overlaps_body(player): player.register_interaction(self)
 
 
 
