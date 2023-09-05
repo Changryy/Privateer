@@ -17,3 +17,8 @@ func enter(_msg := {}) -> void:
 		if is_instance_valid(playback) and !animation.is_empty():
 			playback.travel(animation)
 
+
+func unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		switch_to(^"Movement")
+

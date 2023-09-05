@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8a36jdurxgs2"
-path="res://.godot/imported/Dingy2Player.png-c5f4e5c789d2c0cadbce1d450a703ba8.ctex"
+path="res://.godot/imported/Dingy2Player.png-29abbef76ec4ecd0b33f92875d9396d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/World/Player/Dingy2Player.png"
-dest_files=["res://.godot/imported/Dingy2Player.png-c5f4e5c789d2c0cadbce1d450a703ba8.ctex"]
+source_file="res://Game/World/Player/Sprites/Dingy2Player.png"
+dest_files=["res://.godot/imported/Dingy2Player.png-29abbef76ec4ecd0b33f92875d9396d1.ctex"]
 
 [params]
 
