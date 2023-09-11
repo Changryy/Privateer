@@ -65,13 +65,13 @@ func player_disconnected(id: int) -> void:
 func loaded() -> void:
 	var player := Preloads.player.instantiate()
 	player.name = str(multiplayer.get_remote_sender_id())
-	%Players.add_child(player)
+	World.gamespace.add(player)
 
 
 
 func singleplayer() -> void:
 	var player := Preloads.player.instantiate()
-	%Players.add_child(player)
+	World.gamespace.add(player)
 
 
 

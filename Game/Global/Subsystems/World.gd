@@ -20,4 +20,5 @@ func get_spawnpoint() -> Vector2:
 	if is_instance_valid(spawnpoint): return spawnpoint.position
 	return Vector2.ZERO
 
-
+func get_gamespace(id: int) -> Gamespace:
+	return Gamespace.new()

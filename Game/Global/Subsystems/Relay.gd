@@ -20,7 +20,22 @@ func sync_ship(rotation: float) -> void:
 
 
 
+## Called when a node is added to a gamespace and is meant to sync that addition with the clients
+func added(node: Node, gamespace: Gamespace) -> void:
+	var type := &"Invalid"
+	if node is Player: type = &"Player"
+	
+	var data = {
+		gamespace = gamespace.id,
+		type = type
+	}
 
+
+
+@rpc("authority", "call_remote", "reliable")
+func sync_addition(data: Dictionary) -> void:
+	var gamespace := World.get_gamespace(data.gamespace)
+	if is_instance_valid(gamespace): gamespace.add_()
 
 
 
