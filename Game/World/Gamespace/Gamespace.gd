@@ -1,14 +1,10 @@
 extends Area2D
 class_name Gamespace
 
-enum Nodes {
-	player,
-	ship
-}
-
 var hitbox := CollisionPolygon2D.new()
 var viewport := SubViewport.new()
 var sprite := Sprite2D.new()
+var spawnpoint: Node
 
 
 func _ready() -> void:
@@ -22,8 +18,7 @@ func add(node: Node) -> void:
 	viewport.add_child(node)
 	if Sync.is_connected: Relay.added(node, self)
 
-func create(data: Dictionary) -> void:
+
+func add_from_data(_data: Dictionary) -> void:
 	pass
-
-
 

@@ -117,7 +117,17 @@ mouse_filter = 2
 color = Color(0.690719, 0.885804, 1, 1)
 
 [node name="Ship" parent="." node_paths=PackedStringArray("animation") instance=ExtResource("1_cfj4t")]
-animation = NodePath("../Node2D/Ship")
+animation = NodePath("../ShipMover/Ship")
+
+[node name="ShipMover" type="RemoteTransform2D" parent="."]
+unique_name_in_owner = true
+update_scale = false
+
+[node name="Ship" type="AnimationPlayer" parent="ShipMover"]
+speed_scale = 0.8
+libraries = {
+"": SubResource("AnimationLibrary_0ipfr")
+}
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 z_index = 20
@@ -419,16 +429,6 @@ position = Vector2(-1055, -32)
 texture = ExtResource("2_l1nrt")
 region_enabled = true
 region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
-
-[node name="Node2D" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../Ship")
-update_scale = false
-
-[node name="Ship" type="AnimationPlayer" parent="Node2D"]
-speed_scale = 0.8
-libraries = {
-"": SubResource("AnimationLibrary_0ipfr")
-}
 
 [node name="Ocean" type="AnimationPlayer" parent="."]
 libraries = {

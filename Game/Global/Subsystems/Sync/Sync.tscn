@@ -4,8 +4,3 @@
 
 [node name="Sync" type="Node"]
 script = ExtResource("1_wmkjg")
-
-[node name="Players" type="MultiplayerSpawner" parent="."]
-unique_name_in_owner = true
-_spawnable_scenes = PackedStringArray("res://Game/World/Player/Player.tscn")
-spawn_path = NodePath(".")

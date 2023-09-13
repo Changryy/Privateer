@@ -7,7 +7,7 @@ signal starting
 
 func connect_to_server() -> void:
 	starting.emit()
-	Sync.connect_to("changry.no")
+	Sync.connect_to_server()
 
 
 
