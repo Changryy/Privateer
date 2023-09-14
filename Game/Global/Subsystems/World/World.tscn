@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://jki2b5wusw0s"]
+
+[ext_resource type="Script" path="res://Game/Global/Subsystems/World/World.gd" id="1_510du"]
+[ext_resource type="PackedScene" uid="uid://bn5yn84yfo7xf" path="res://Game/World/Ship/Ship.tscn" id="2_e57ni"]
+[ext_resource type="Script" path="res://Game/Global/Subsystems/World/Layer.gd" id="3_elom0"]
+
+[node name="World" type="Node" node_paths=PackedStringArray("default_layer")]
+script = ExtResource("1_510du")
+default_space = ExtResource("2_e57ni")
+default_layer = NodePath("Layers/Player/Layer2")
+
+[node name="Layers" type="Node" parent="."]
+
+[node name="Enemies" type="Node" parent="Layers"]
+
+[node name="Layer-3" type="CanvasLayer" parent="Layers/Enemies"]
+script = ExtResource("3_elom0")
+id = -3
+
+[node name="Layer-2" type="CanvasLayer" parent="Layers/Enemies"]
+script = ExtResource("3_elom0")
+id = -2
+
+[node name="Layer-1" type="CanvasLayer" parent="Layers/Enemies"]
+script = ExtResource("3_elom0")
+id = -1
+
+[node name="Islands" type="CanvasLayer" parent="Layers"]
+script = ExtResource("3_elom0")
+
+[node name="Player" type="Node" parent="Layers"]
+
+[node name="Layer1" type="CanvasLayer" parent="Layers/Player"]
+script = ExtResource("3_elom0")
+id = 1
+
+[node name="Layer2" type="CanvasLayer" parent="Layers/Player"]
+script = ExtResource("3_elom0")
+id = 2
+
+[node name="Layer3" type="CanvasLayer" parent="Layers/Player"]
+script = ExtResource("3_elom0")
+id = 3

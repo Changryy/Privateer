@@ -8,9 +8,19 @@ const JUMP_HEIGHT: float = 4_000
 
 var interactables: Array[Interactable] = []
 
+var movable := false
 
+func enter(_msg := {}) -> void:
+	super()
+	await get_tree().process_frame
+	movable = true
+
+func exit() -> void:
+	movable = false
 
 func physics_process(delta: float) -> void:
+	if !movable: return
+	
 	owner.velocity.y += GRAVITY * delta
 	owner.velocity.x = Input.get_axis(&"left", &"right") * SPEED
 	
@@ -39,7 +49,7 @@ func physics_process(delta: float) -> void:
 
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"): jump()
-	if event.is_action_pressed("interact"): interact()
+	elif event.is_action_pressed("interact"): interact()
 
 
 func jump():

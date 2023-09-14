@@ -26,7 +26,7 @@ func added(scene: PackedScene, node_name: String, gamespace: Gamespace) -> void:
 
 @rpc("authority", "call_remote", "reliable")
 func sync_addition(gamespace_id: int, scene_path: String, node_name: String) -> void:
-	var gamespace := World.get_gamespace(gamespace_id)
+	var gamespace := World.get_gamespace(gamespace_id) as Gamespace
 	
 	if is_instance_valid(gamespace):
 		gamespace.add(load(scene_path), node_name)

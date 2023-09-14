@@ -3,11 +3,16 @@ extends Node
 signal interaction(interacter: Player)
 signal loaded
 
+@export var default_space: PackedScene
+@export var default_layer: Layer
+
 var player: Player
 var players := {}
 
 var gamespace := Gamespace.new()
 var gamespaces := {0: gamespace}
+
+var layers := {}
 
 func get_data() -> Dictionary:
 	var data: Array[Dictionary] = []
@@ -27,7 +32,7 @@ func get_data() -> Dictionary:
 
 func load_world(data: Dictionary = {}) -> void:
 	get_tree().change_scene_to_file("res://Game/World/Main.tscn")
-	add_child(gamespace)
+	default_layer.add_child(gamespace)
 	await get_tree().process_frame
 	
 	if data.is_empty():
@@ -37,7 +42,7 @@ func load_world(data: Dictionary = {}) -> void:
 	for node in data.gamespaces:
 		if not node.gamespace in gamespaces:
 			var space = Gamespace.new()
-			add_child(space)
+			default_layer.add_child(space)
 		
 		Relay.sync_addition(node.gamespace, node.path, node.name)
 	
@@ -46,7 +51,7 @@ func load_world(data: Dictionary = {}) -> void:
 
 
 func create_world() -> void:
-	gamespace.add(Sync.space)
+	gamespace.add(default_space)
 	
 	await get_tree().process_frame
 	loaded.emit()
@@ -75,4 +80,10 @@ func get_position(node: Node2D) -> Vector2:
 func _unhandled_input(event: InputEvent) -> void:
 	if !gamespace.viewport.is_inside_tree(): return
 	gamespace.viewport.push_input(event)
+
+func get_layer(layer_id: int) -> Layer:
+	assert(layer_id in layers, "World does not have layer %s" % layer_id)
+	assert(is_instance_valid(layers[layer_id]), "World has invalid layer")
+	return layers.get(layer_id)
+
 

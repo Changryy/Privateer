@@ -7,9 +7,6 @@ var peer := ENetMultiplayerPeer.new()
 var is_connected := false
 
 
-@export var space: PackedScene
-
-
 
 func _ready() -> void:
 	if "--server" in OS.get_cmdline_args(): start_server()

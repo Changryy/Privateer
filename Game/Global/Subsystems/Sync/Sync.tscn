@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1lsdba081jwg"]
-
-[ext_resource type="Script" path="res://Game/Global/Subsystems/Sync/Sync.gd" id="1_wmkjg"]
-[ext_resource type="PackedScene" uid="uid://bn5yn84yfo7xf" path="res://Game/World/Ship/Ship.tscn" id="2_jdrtw"]
-
-[node name="Sync" type="Node"]
-script = ExtResource("1_wmkjg")
-space = ExtResource("2_jdrtw")

@@ -6,18 +6,14 @@ class_name Player
 @export var ghost := false
 
 
-func _enter_tree() -> void:
+func _ready() -> void:
 	if ghost: return
 	if name.is_valid_int(): set_multiplayer_authority(name.to_int())
 	position = World.get_spawnpoint()
-
-
-func _ready() -> void:
-	if ghost: return
+	
 	World.players[name] = self
 	
 	if !is_multiplayer_authority(): return
-	
 	World.player = self
 
 
