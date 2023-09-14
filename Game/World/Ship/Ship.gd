@@ -7,7 +7,7 @@ class_name Ship
 
 func _process(_delta: float) -> void:
 	if !is_multiplayer_authority(): return
-	Relay.rpc("sync_ship", animation.current_animation_position)
+#	Relay.rpc("sync_ship", animation.current_animation_position)
 
 
 
@@ -27,5 +27,6 @@ func sync(seconds: float) -> void:
 
 
 func _ready() -> void:
-	animation.play("Test")
+	pass
+#	animation.play("Test")
 

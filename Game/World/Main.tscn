@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://ydu4iqbf4i7i"]
 
-[ext_resource type="PackedScene" uid="uid://bn5yn84yfo7xf" path="res://Game/World/Ship/Ship.tscn" id="1_cfj4t"]
 [ext_resource type="Script" path="res://Game/World/Root.gd" id="1_rlrb3"]
 [ext_resource type="Texture2D" uid="uid://dqsgl7b4ohmgo" path="res://Game/World/Ocean/PrivateersConceptWater.png" id="2_l1nrt"]
+[ext_resource type="Script" path="res://Game/World/Player/PlayerCamera.gd" id="4_00xa1"]
 
 [sub_resource type="Animation" id="Animation_q54v6"]
 length = 0.001
@@ -116,14 +116,12 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.690719, 0.885804, 1, 1)
 
-[node name="Ship" parent="." node_paths=PackedStringArray("animation") instance=ExtResource("1_cfj4t")]
-animation = NodePath("../ShipMover/Ship")
-
 [node name="ShipMover" type="RemoteTransform2D" parent="."]
 unique_name_in_owner = true
 update_scale = false
 
 [node name="Ship" type="AnimationPlayer" parent="ShipMover"]
+unique_name_in_owner = true
 speed_scale = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_0ipfr")
@@ -434,3 +432,11 @@ region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
 libraries = {
 "": SubResource("AnimationLibrary_i1e0x")
 }
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -765)
+zoom = Vector2(0.4, 0.4)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("4_00xa1")

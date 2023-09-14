@@ -32,7 +32,7 @@ func physics_process(delta: float) -> void:
 	owner.emit_sync()
 	owner.velocity.y += GRAVITY * delta
 	
-	if owner.position.y > 5_000:
+	if World.get_position(owner).y > 5_000:
 		switch_to(^"Die")
 
 

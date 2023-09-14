@@ -68,6 +68,7 @@ func player_disconnected(id: int) -> void:
 
 
 func singleplayer() -> void:
+	await World.load_world()
 	World.gamespace.add(Preloads.player)
 
 

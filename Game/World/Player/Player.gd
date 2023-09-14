@@ -7,7 +7,7 @@ class_name Player
 
 func _enter_tree() -> void:
 	if name.is_valid_int(): set_multiplayer_authority(name.to_int())
-	global_position = World.get_spawnpoint()
+	position = World.get_spawnpoint()
 
 
 func _ready() -> void:
@@ -16,7 +16,6 @@ func _ready() -> void:
 	if !is_multiplayer_authority(): return
 	
 	World.player = self
-	%Camera.make_current()
 
 
 

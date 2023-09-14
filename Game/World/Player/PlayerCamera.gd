@@ -7,14 +7,18 @@ class_name PlayerCamera
 @export var max_zoom: float = .4
 
 var screen_shake_offset := Vector2.ZERO
-
+var static_offset := position
 
 
 func _process(_delta: float) -> void:
+	if !is_instance_valid(World.player): return
+	global_position = World.get_position(World.player)
+	
 	var pos := get_viewport().get_mouse_position() - get_viewport_rect().size / 2.
 	
 	offset = pos * mouse_follow
 	offset += screen_shake_offset
+	offset += static_offset
 	
 	var d := (pos / get_viewport_rect().size).length()
 	
