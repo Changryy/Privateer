@@ -53,9 +53,7 @@ func connected(server_version: String, world_data: Dictionary) -> void:
 ## Client tells [server] it has loaded
 @rpc("call_remote", "any_peer", "reliable")
 func loaded() -> void:
-	var player := Preloads.player.instantiate()
-	player.name = str(multiplayer.get_remote_sender_id())
-	World.gamespace.add(player)
+	World.gamespace.add(Preloads.player, str(multiplayer.get_remote_sender_id()))
 
 
 
@@ -71,8 +69,7 @@ func player_disconnected(id: int) -> void:
 
 
 func singleplayer() -> void:
-	var player := Preloads.player.instantiate()
-	World.gamespace.add(player)
+	World.gamespace.add(Preloads.player)
 
 
 

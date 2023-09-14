@@ -27,6 +27,5 @@ func sync(seconds: float) -> void:
 
 
 func _ready() -> void:
-	World.ship = self
 	animation.play("Test")
 

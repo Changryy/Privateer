@@ -19,24 +19,17 @@ func sync_ship(rotation: float) -> void:
 
 
 ## Called when a node is added to a gamespace and is meant to sync that addition with the clients
-func added(node: Node, gamespace: Gamespace) -> void:
-	var type := &"Invalid"
-	if node.has_method(&"get_type"):
-		type = node.get_type()
-	
-	var data = {
-		gamespace = gamespace.id,
-		type = type
-	}
-	
-	rpc(&"sync_addition", data)
+func added(scene: PackedScene, node_name: String, gamespace: Gamespace) -> void:
+	rpc(&"sync_addition", gamespace.id, scene.resource_path, node_name)
 
 
 
 @rpc("authority", "call_remote", "reliable")
-func sync_addition(data: Dictionary) -> void:
-	var gamespace := World.get_gamespace(data.gamespace)
-	if is_instance_valid(gamespace): gamespace.add_from_data(data)
+func sync_addition(gamespace_id: int, scene_path: String, node_name: String) -> void:
+	var gamespace := World.get_gamespace(gamespace_id)
+	
+	if is_instance_valid(gamespace):
+		gamespace.add(load(scene_path), node_name)
 
 
 

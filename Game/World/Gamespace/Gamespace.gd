@@ -14,11 +14,12 @@ func _ready() -> void:
 	sprite.texture = viewport.get_texture()
 
 
-func add(node: Node) -> void:
+func add(scene: PackedScene, node_name := "") -> void:
+	var node := scene.instantiate()
+	if node_name: node.name = node_name
 	viewport.add_child(node)
-	if Sync.is_connected: Relay.added(node, self)
+	
+	if Sync.is_server():
+		Relay.added(scene, node_name, self)
 
-
-func add_from_data(_data: Dictionary) -> void:
-	pass
 
