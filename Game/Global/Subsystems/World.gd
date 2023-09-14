@@ -73,6 +73,6 @@ func get_position(node: Node2D) -> Vector2:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if !is_inside_tree(): return
+	if !gamespace.viewport.is_inside_tree(): return
 	gamespace.viewport.push_input(event)
 

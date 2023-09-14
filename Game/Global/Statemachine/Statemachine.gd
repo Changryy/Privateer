@@ -13,6 +13,8 @@ var state: State
 
 
 func _ready() -> void:
+	if owner.ghost: return
+	
 	if !owner.is_multiplayer_authority():
 		if is_instance_valid(puppet):
 			switch_to(puppet)

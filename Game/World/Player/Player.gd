@@ -3,14 +3,17 @@ class_name Player
 
 
 @export var controller: PlayerController
+@export var ghost := false
 
 
 func _enter_tree() -> void:
+	if ghost: return
 	if name.is_valid_int(): set_multiplayer_authority(name.to_int())
 	position = World.get_spawnpoint()
 
 
 func _ready() -> void:
+	if ghost: return
 	World.players[name] = self
 	
 	if !is_multiplayer_authority(): return

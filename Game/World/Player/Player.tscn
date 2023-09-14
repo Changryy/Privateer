@@ -27,6 +27,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("4_72g1k")]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-283, -30)]
+}
 
 [sub_resource type="Animation" id="Animation_ll7xs"]
 length = 0.001
@@ -110,16 +122,16 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hw5sh"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r2yhl"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rp5uj"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5fyul"]
 states/Helming/node = SubResource("AnimationNodeAnimation_5hlwk")
-states/Helming/position = Vector2(346, 187)
+states/Helming/position = Vector2(346.667, 215.667)
 states/Idle/node = SubResource("AnimationNodeAnimation_mxjru")
 states/Idle/position = Vector2(346, 103)
 states/Walk/node = SubResource("AnimationNodeAnimation_xjejn")
 states/Walk/position = Vector2(600, 103)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rwfw0"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_pvtf6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dote5"), "Idle", "Helming", SubResource("AnimationNodeStateMachineTransition_hw5sh"), "Helming", "Idle", SubResource("AnimationNodeStateMachineTransition_r2yhl")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rwfw0"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_pvtf6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dote5"), "Idle", "Helming", SubResource("AnimationNodeStateMachineTransition_hw5sh"), "Helming", "Idle", SubResource("AnimationNodeStateMachineTransition_rp5uj")]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("controller")]
 collision_mask = 2
