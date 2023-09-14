@@ -4,7 +4,7 @@ signal interaction(interacter: Player)
 signal loaded
 
 @export var default_space: PackedScene
-@export var default_layer: Layer
+var default_layer: Layer
 
 var player: Player
 var players := {}
@@ -32,6 +32,7 @@ func get_data() -> Dictionary:
 
 func load_world(data: Dictionary = {}) -> void:
 	get_tree().change_scene_to_file("res://Game/World/Main.tscn")
+	await get_tree().process_frame
 	default_layer.add_child(gamespace)
 	await get_tree().process_frame
 	

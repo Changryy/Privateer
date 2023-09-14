@@ -1,0 +1,351 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb0nhj1ojfmf5"]
+
+[ext_resource type="Texture2D" uid="uid://dqsgl7b4ohmgo" path="res://Game/World/Ocean/PrivateersConceptWater.png" id="1_emeuo"]
+[ext_resource type="Script" path="res://Game/World/Ocean/Ocean.gd" id="1_gcruj"]
+
+[sub_resource type="Animation" id="Animation_7mei0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1450.0]
+}
+
+[sub_resource type="Animation" id="Animation_4u36l"]
+resource_name = "Test"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1450.0, 248.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1e0x"]
+_data = {
+"RESET": SubResource("Animation_7mei0"),
+"Test": SubResource("Animation_4u36l")
+}
+
+[node name="Ocean" type="Polygon2D"]
+z_index = 20
+position = Vector2(1450, 27)
+scale = Vector2(1.5, 1.5)
+color = Color(0.230469, 0.445313, 0.566406, 1)
+polygon = PackedVector2Array(-17736, 3, 14794, 1, 14915, 18491, -17736, 18489)
+script = ExtResource("1_gcruj")
+
+[node name="Ocean" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i1e0x")
+}
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="PrivateersConceptWater" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-10655, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater2" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-11455, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater3" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-9855, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater4" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-9055, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater6" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-8256, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater7" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-7456, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater5" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-12257, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater8" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-5054, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater9" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-5854, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater10" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-4254, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater11" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-3454, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater12" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-2655, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater13" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-1855, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater14" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-6656, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater15" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-16256, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater16" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-17056, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater17" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-15456, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater18" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-14656, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater19" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-13857, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater20" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-13057, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater21" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-17858, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater22" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(6148, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater23" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(5348, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater24" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(6948, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater25" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(7748, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater26" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(8547, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater27" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(9347, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater28" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(4546, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater29" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(11749, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater30" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(10949, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater31" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(12549, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater32" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(13349, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater33" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(14148, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater34" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(14948, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater35" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(10147, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater36" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(547, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater37" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-253, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater38" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(1347, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater39" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(2147, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater40" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(2946, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater41" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(3746, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
+
+[node name="PrivateersConceptWater42" type="Sprite2D" parent="Sprites"]
+z_index = -1
+position = Vector2(-1055, -32)
+texture = ExtResource("1_emeuo")
+region_enabled = true
+region_rect = Rect2(73.541, 767.445, 842.297, 169.104)
