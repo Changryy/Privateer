@@ -4,10 +4,17 @@ signal interaction(interacter: Player)
 
 
 var player: Player
-var gamespaces := {}
-var gamespace := Gamespace.new()
+var players := {}
 
-func get_data() -> Dictionary: return {}
+var gamespace := Gamespace.new()
+var gamespaces := {0: gamespace}
+
+func get_data() -> Dictionary:
+	
+	# Go trough gamespaces and make a list
+	# of everything that needs to be added
+	# to each of the gamespaces
+	return {}
 
 
 func load_world(data: Dictionary) -> void:
@@ -15,7 +22,11 @@ func load_world(data: Dictionary) -> void:
 	await get_tree().process_frame
 	
 	if data.is_empty():
-		gamespace.add(Sync.space.instantiate())
+		gamespace.add(Sync.space)
+	
+	# Go trough data and call
+	# Relay.sync_addition()
+	# For every item that needs adding
 
 
 
@@ -29,3 +40,5 @@ func get_spawnpoint() -> Vector2:
 
 func get_gamespace(id: int) -> Gamespace:
 	return gamespaces.get(id)
+
+

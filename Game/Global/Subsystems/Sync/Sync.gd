@@ -4,7 +4,6 @@ const VERSION := "0.2.2"
 const PORT: int = 8765
 
 var peer := ENetMultiplayerPeer.new()
-var players := {}
 var is_connected := false
 
 

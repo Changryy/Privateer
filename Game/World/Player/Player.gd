@@ -11,6 +11,8 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	World.players[name] = self
+	
 	if !is_multiplayer_authority(): return
 	
 	World.player = self
