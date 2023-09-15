@@ -6,10 +6,10 @@ var helm: Helm
 
 func enter(msg := {}) -> void:
 	super(msg)
-	%Sprite.flip_h = false
-	%Sprite.offset.x = abs(%Sprite.offset.x)
+	owner.velocity = Vector2.ZERO
 	helm = msg.helm
-	owner.global_position = msg.helm.pos.global_position
+	await RenderingServer.frame_post_draw
+	owner.flip(false)
 
 
 
@@ -24,6 +24,8 @@ func unhandled_input(event: InputEvent) -> void:
 
 func exit() -> void:
 	helm.release()
+	await RenderingServer.frame_post_draw
+	owner.flip(true)
 
 
 

@@ -3,6 +3,7 @@ class_name Helm
 
 
 @export var pos: Marker2D
+@export var drop_pos: Marker2D
 
 var helming: Player
 
@@ -12,24 +13,23 @@ func can_interact(_player: Player) -> bool:
 
 func interact(player: Player) -> void:
 	helming = player
+	if is_instance_valid(pos):
+		helming.global_position = owner.to_local(pos.global_position)
 	helming.set_state(^"Helming", {helm = self})
 
 
+
 func release() -> void:
+	if is_instance_valid(drop_pos):
+		helming.global_position = owner.to_local(drop_pos.global_position)
 	helming = null
 
 
 func current_layer() -> int:
-	var gamespace := owner.get_meta(&"gamespace") as Gamespace
-	
-	if !is_instance_valid(gamespace):
-		assert(false, "Ship must be in a gamespace")
-		return 0
-	
-	var layer := gamespace.get_parent() as Layer
+	var layer := owner.get_parent() as Layer
 	
 	if !is_instance_valid(layer):
-		assert(false, "Gamespace must be in a layer")
+		assert(false, "Ship must be in a layer")
 		return 0
 	
 	return layer.id
@@ -63,17 +63,10 @@ func move_to_layer(layer_id: int) -> void:
 		assert(false, "Invalid layer %s" % layer_id)
 		return
 	
-	if !is_instance_valid(owner):
-		assert(false, "Invalid ship")
-		return
+	owner.reparent(layer)
 	
-	var gamespace := owner.get_meta(&"gamespace") as Gamespace
-	
-	if !is_instance_valid(gamespace):
-		assert(false, "Ship does not have gamespace")
-		return
-	
-	gamespace.reparent(layer)
+	for c in owner.contents:
+		c.reparent(layer)
 
 
 

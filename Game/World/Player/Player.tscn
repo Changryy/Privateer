@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://b7nrfn7peb5mq"]
+[gd_scene load_steps=24 format=3 uid="uid://b7nrfn7peb5mq"]
 
 [ext_resource type="Script" path="res://Game/World/Player/Player.gd" id="1_hy8ex"]
 [ext_resource type="Texture2D" uid="uid://c8a36jdurxgs2" path="res://Game/World/Player/Sprites/Dingy2Player.png" id="2_1kjdp"]
 [ext_resource type="Script" path="res://Game/Global/Statemachine/Statemachine.gd" id="4_1jukd"]
 [ext_resource type="Texture2D" uid="uid://blihx4tlsonfa" path="res://Game/World/Player/Sprites/Dingy2PlayerHelm.png" id="4_72g1k"]
+[ext_resource type="Script" path="res://Game/World/Player/SpritePos.gd" id="4_bjk0p"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Movement.gd" id="5_527tq"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Helming.gd" id="6_ekgyc"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Die.gd" id="7_vvkv8"]
@@ -18,7 +19,7 @@ resource_name = "Helming"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
+tracks/0/path = NodePath("SpritePos/Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +31,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("SpritePos/Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -45,7 +46,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("SpritePos/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -57,7 +58,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:texture")
+tracks/1/path = NodePath("SpritePos/Sprite:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -75,7 +76,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("SpritePos/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -87,7 +88,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:texture")
+tracks/1/path = NodePath("SpritePos/Sprite:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -133,22 +134,18 @@ states/Walk/node = SubResource("AnimationNodeAnimation_xjejn")
 states/Walk/position = Vector2(600, 103)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rwfw0"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_pvtf6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dote5"), "Idle", "Helming", SubResource("AnimationNodeStateMachineTransition_hw5sh"), "Helming", "Idle", SubResource("AnimationNodeStateMachineTransition_rp5uj")]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("controller")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("controller", "interaction")]
 collision_mask = 2
 floor_constant_speed = true
 floor_snap_length = 32.0
 script = ExtResource("1_hy8ex")
 controller = NodePath("Input/Movement")
+interaction = NodePath("SpritePos/Interaction")
 metadata/_edit_horizontal_guides_ = []
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, -481)
 shape = SubResource("CapsuleShape2D_6cmj4")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-texture = ExtResource("2_1kjdp")
-offset = Vector2(150, -519)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -160,6 +157,24 @@ unique_name_in_owner = true
 tree_root = SubResource("AnimationNodeStateMachine_5fyul")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+
+[node name="SpritePos" type="Node2D" parent="."]
+top_level = true
+script = ExtResource("4_bjk0p")
+
+[node name="Sprite" type="Sprite2D" parent="SpritePos"]
+unique_name_in_owner = true
+texture = ExtResource("2_1kjdp")
+offset = Vector2(150, -519)
+
+[node name="Interaction" type="Area2D" parent="SpritePos"]
+collision_layer = 12
+collision_mask = 0
+monitoring = false
+
+[node name="Hitbox" type="CollisionShape2D" parent="SpritePos/Interaction"]
+position = Vector2(0, -481)
+shape = SubResource("CapsuleShape2D_6cmj4")
 
 [node name="Input" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "puppet")]
 script = ExtResource("4_1jukd")
@@ -180,5 +195,3 @@ script = ExtResource("7_vvkv8")
 [node name="Puppet" type="Node" parent="Input"]
 script = ExtResource("8_mgrkk")
 animation = &"Idle"
-
-[node name="Camera2D" type="Camera2D" parent="."]

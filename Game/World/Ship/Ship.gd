@@ -1,32 +1,22 @@
-extends StaticBody2D
+extends Node2D
 class_name Ship
 
+var contents: Array[Node2D] = []
 
-@export var animation: AnimationPlayer
+var layer_offset: float = 0
+var wave_offset: float = 0
+
+func get_spawnpoint() -> Vector2: return Vector2.ZERO
+
+
+func _enter_tree() -> void:
+	await get_tree().process_frame
+	if !is_instance_valid(get_parent()): breakpoint; return
+	if not get_parent() is Layer: breakpoint; return
+	layer_offset = -get_parent().height
+	%Ship.play("Test")
 
 
 func _process(_delta: float) -> void:
-	if !is_multiplayer_authority(): return
-#	Relay.rpc("sync_ship", animation.current_animation_position)
-
-
-
-var last_sync: int = 0
-
-func sync(seconds: float) -> void:
-	if last_sync:
-		var time: float = Time.get_ticks_usec() - last_sync
-		
-		if time < 300_000:
-			time /= 1e+6
-			time *= animation.speed_scale
-			animation.seek(seconds + time)
-	
-	last_sync = Time.get_ticks_usec()
-
-
-
-func _ready() -> void:
-	pass
-#	animation.play("Test")
+	position.y = layer_offset + wave_offset
 

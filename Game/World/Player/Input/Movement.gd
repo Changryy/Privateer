@@ -42,7 +42,7 @@ func physics_process(delta: float) -> void:
 	owner.emit_sync()
 	owner.velocity.y += GRAVITY * delta
 	
-	if World.get_position(owner).y > 5_000:
+	if owner.global_position.y > 5_000:
 		switch_to(^"Die")
 
 
@@ -68,7 +68,7 @@ func interact() -> void:
 	for object in interactables:
 		if !is_instance_valid(object): continue
 		if !object.can_interact(owner): continue
-		var distance: float = owner.global_position.distance_squared_to(object.global_position)
+		var distance: float = owner.interaction.global_position.distance_squared_to(object.global_position)
 		if distance > closest_distance: continue
 		
 		closest_distance = distance

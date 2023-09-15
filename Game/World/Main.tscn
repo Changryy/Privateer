@@ -10,7 +10,7 @@ length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
+tracks/0/path = NodePath(".:wave_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -37,7 +37,7 @@ loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
+tracks/0/path = NodePath(".:wave_offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -122,6 +122,7 @@ script = ExtResource("3_732wu")
 [node name="Layer1" type="CanvasLayer" parent="Layers/Player"]
 script = ExtResource("3_732wu")
 id = 1
+height = 400
 
 [node name="Ocean3" parent="Layers/Player/Layer1" instance=ExtResource("2_mueq4")]
 
@@ -129,12 +130,11 @@ id = 1
 script = ExtResource("3_732wu")
 id = 2
 default = true
+height = 200
 
 [node name="Ocean3" parent="Layers/Player/Layer2" instance=ExtResource("2_mueq4")]
 
 [node name="Layer3" type="CanvasLayer" parent="Layers/Player"]
-offset = Vector2(0, 200)
-transform = Transform2D(1, 0, 0, 1, 0, 200)
 script = ExtResource("3_732wu")
 id = 3
 

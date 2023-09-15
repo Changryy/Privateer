@@ -10,34 +10,14 @@ func sync_player(position: Vector2, velocity: Vector2, flip_h: bool) -> void:
 
 
 
-
-@rpc("any_peer", "call_remote", "unreliable_ordered")
-func sync_ship(rotation: float) -> void:
-	if is_instance_valid(World.ship):
-		World.ship.sync(rotation)
-
-
-
-## Called when a node is added to a gamespace and is meant to sync that addition with the clients
-func added(scene: PackedScene, node_name: String, gamespace: Gamespace) -> void:
-	rpc(&"sync_addition", gamespace.id, scene.resource_path, node_name)
-
-
-
-@rpc("authority", "call_remote", "reliable")
-func sync_addition(gamespace_id: int, scene_path: String, node_name: String) -> void:
-	var gamespace := World.get_gamespace(gamespace_id) as Gamespace
-	if !is_instance_valid(gamespace): breakpoint; return
-	
-	gamespace.add(load(scene_path), node_name)
-
-
 func interact(player: Player, interactable: Interactable) -> void:
 	if !player.name.is_valid_int():
 		assert(false, "Player name invalid: %s" % player.name)
 		return
 	
-	rpc(&"sync_interaction", int(player.name), get_path_to(interactable))
+	rpc(&"sync_interaction", player.name.to_int(), get_path_to(interactable))
+
+
 
 
 @rpc("any_peer", "reliable", "call_local")
@@ -49,5 +29,26 @@ func sync_interaction(player_id: int, interactable_path: NodePath) -> void:
 	if !is_instance_valid(interactable): breakpoint; return
 	
 	interactable.interact(player)
+
+
+
+
+func add(scene: PackedScene, layer: Layer, node_name: String = "") -> void:
+	if Sync.is_connected and !is_multiplayer_authority(): breakpoint; return
+	rpc(&"add_scene", scene.resource_path, node_name, layer.id)
+
+
+@rpc("reliable", "call_local", "authority")
+func add_scene(scene_path: String, node_name: String, layer_id: int) -> void:
+	var node: Node = load(scene_path).instantiate()
+	node.set_meta(&"path", scene_path)
+	if node_name: node.name = node_name
+	
+	var layer := World.get_layer(layer_id) as Layer
+	if is_instance_valid(layer): layer.add_child(node)
+
+
+
+
 
 
