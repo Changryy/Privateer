@@ -52,12 +52,8 @@ func loaded() -> void:
 	World.gamespace.add(Preloads.player, str(multiplayer.get_remote_sender_id()))
 
 
-
-func get_player_by_id(id: int) -> Player:
-	return %Players.get_node_or_null(str(id)) as Player
-
 func player_disconnected(id: int) -> void:
-	var player := get_player_by_id(id)
+	var player := World.get_player(id) as Player
 	
 	if is_instance_valid(player):
 		player.queue_free()

@@ -75,7 +75,7 @@ func interact() -> void:
 		closest_interactable = object
 	
 	if is_instance_valid(closest_interactable):
-		closest_interactable.interact(owner)
+		Relay.interact(owner, closest_interactable)
 
 
 

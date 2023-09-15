@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Game/Global/Subsystems/World/World.gd" id="1_510du"]
 [ext_resource type="PackedScene" uid="uid://bn5yn84yfo7xf" path="res://Game/World/Ship/Ship.tscn" id="2_e57ni"]
 
-[node name="World" type="Node" node_paths=PackedStringArray("default_layer")]
+[node name="World" type="Node"]
 script = ExtResource("1_510du")
 default_space = ExtResource("2_e57ni")
-default_layer = NodePath("")

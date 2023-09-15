@@ -87,4 +87,8 @@ func get_layer(layer_id: int) -> Layer:
 	assert(is_instance_valid(layers[layer_id]), "World has invalid layer")
 	return layers.get(layer_id)
 
+func get_player(player_id: int) -> Player:
+	assert(player_id in players, "World does not have player %s" % player_id)
+	assert(is_instance_valid(players[player_id]), "World has invalid player")
+	return players.get(player_id)
 

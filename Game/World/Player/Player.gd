@@ -31,11 +31,15 @@ func sync(pos: Vector2, vel: Vector2, flip_h: bool) -> void:
 
 
 func set_state(state_name: NodePath, msg := {}) -> void:
-	if is_instance_valid(controller):
-		controller.switch_to(state_name, msg)
+	if !is_multiplayer_authority(): return
+	if !is_instance_valid(controller): breakpoint; return
+	
+	controller.switch_to(state_name, msg)
 
 
 func register_interaction(interactable: Interactable) -> void:
-	if is_instance_valid(controller):
-		controller.interactables.append(interactable)
+	if !is_multiplayer_authority(): breakpoint; return
+	if !is_instance_valid(controller): breakpoint; return
+	
+	controller.interactables.append(interactable)
 
