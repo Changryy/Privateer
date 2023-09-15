@@ -7,9 +7,10 @@ class_name Helm
 var helming: Player
 
 
+func can_interact(_player: Player) -> bool:
+	return !is_instance_valid(helming)
 
 func interact(player: Player) -> void:
-	if is_instance_valid(helming): return
 	helming = player
 	helming.set_state(^"Helming", {helm = self})
 

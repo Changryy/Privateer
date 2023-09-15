@@ -67,6 +67,7 @@ func interact() -> void:
 	
 	for object in interactables:
 		if !is_instance_valid(object): continue
+		if !object.can_interact(owner): continue
 		var distance: float = owner.global_position.distance_squared_to(object.global_position)
 		if distance > closest_distance: continue
 		

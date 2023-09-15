@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func interact(_player: Player) -> void: pass
 
+func can_interact(_player: Player) -> bool: return true
 
 func register_interaction(player: Player) -> void:
 	if !is_instance_valid(player): return
