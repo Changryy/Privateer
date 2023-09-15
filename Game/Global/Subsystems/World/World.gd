@@ -17,7 +17,7 @@ var layers := {}
 func get_data() -> Dictionary:
 	var data: Array[Dictionary] = []
 	
-	for space in gamespaces:
+	for space in gamespaces.values():
 		for node in space.get_nodes():
 			data.append({
 				name = node.name,

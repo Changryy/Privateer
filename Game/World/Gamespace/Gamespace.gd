@@ -1,7 +1,7 @@
 extends Area2D
 class_name Gamespace
 
-const SIZE: int = 32768
+const SIZE: int = 32768 / 2 / 2
 const HALF_SIZE := Vector2.ONE * SIZE / 2.
 
 var id: int = -1

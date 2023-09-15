@@ -126,13 +126,11 @@ id = 1
 [node name="Ocean3" parent="Layers/Player/Layer1" instance=ExtResource("2_mueq4")]
 
 [node name="Layer2" type="CanvasLayer" parent="Layers/Player"]
-offset = Vector2(0, 100)
-transform = Transform2D(1, 0, 0, 1, 0, 100)
 script = ExtResource("3_732wu")
 id = 2
 default = true
 
-[node name="Ocean2" parent="Layers/Player/Layer2" instance=ExtResource("2_mueq4")]
+[node name="Ocean3" parent="Layers/Player/Layer2" instance=ExtResource("2_mueq4")]
 
 [node name="Layer3" type="CanvasLayer" parent="Layers/Player"]
 offset = Vector2(0, 200)

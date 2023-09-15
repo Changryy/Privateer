@@ -180,3 +180,5 @@ script = ExtResource("7_vvkv8")
 [node name="Puppet" type="Node" parent="Input"]
 script = ExtResource("8_mgrkk")
 animation = &"Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]

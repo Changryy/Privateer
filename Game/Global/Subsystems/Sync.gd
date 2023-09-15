@@ -25,7 +25,7 @@ func is_server() -> bool:
 	return is_connected and multiplayer.is_server()
 
 ## 1. [Client] connects to server
-func connect_to() -> void:
+func connect_to_server() -> void:
 	peer.create_client("changry.no", PORT)
 	multiplayer.multiplayer_peer = peer
 
