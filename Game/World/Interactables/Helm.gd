@@ -50,11 +50,30 @@ func move_ship(up := true) -> bool:
 	elif new_layer > 3:
 		return false
 	
-	var layer: Layer = World.get_layer(new_layer)
+	rpc(&"move_to_layer", new_layer)
+	return true
+
+
+
+@rpc("any_peer", "call_local", "reliable")
+func move_to_layer(layer_id: int) -> void:
+	var layer: Layer = World.get_layer(layer_id)
 	
 	if !is_instance_valid(layer):
-		return false
+		assert(false, "Invalid layer %s" % layer_id)
+		return
 	
-	owner.get_meta(&"gamespace").reparent(layer)
-	return true
+	if !is_instance_valid(owner):
+		assert(false, "Invalid ship")
+		return
+	
+	var gamespace := owner.get_meta(&"gamespace") as Gamespace
+	
+	if !is_instance_valid(gamespace):
+		assert(false, "Ship does not have gamespace")
+		return
+	
+	gamespace.reparent(layer)
+
+
 
