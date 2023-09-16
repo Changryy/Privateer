@@ -10,10 +10,12 @@ var screen_shake_offset := Vector2.ZERO
 var static_offset := position
 
 
+func _ready() -> void:
+	await owner.finished_setup
+	enabled = owner == World.player
+	if enabled: make_current()
+
 func _process(_delta: float) -> void:
-	if !is_instance_valid(World.player): return
-	global_position = World.get_position(World.player)
-	
 	var pos := get_viewport().get_mouse_position() - get_viewport_rect().size / 2.
 	
 	offset = pos * mouse_follow

@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ydu4iqbf4i7i"]
+[gd_scene load_steps=7 format=3 uid="uid://ydu4iqbf4i7i"]
 
 [ext_resource type="Script" path="res://Game/World/Root.gd" id="1_rlrb3"]
 [ext_resource type="PackedScene" uid="uid://cb0nhj1ojfmf5" path="res://Game/World/Ocean/Ocean.tscn" id="2_mueq4"]
 [ext_resource type="Script" path="res://Game/Global/Subsystems/World/Layer.gd" id="3_732wu"]
-[ext_resource type="Script" path="res://Game/World/Player/PlayerCamera.gd" id="4_00xa1"]
 
 [sub_resource type="Animation" id="Animation_q54v6"]
 length = 0.001
@@ -89,14 +88,6 @@ speed_scale = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_0ipfr")
 }
-
-[node name="Camera" type="Camera2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -765)
-zoom = Vector2(0.4, 0.4)
-position_smoothing_enabled = true
-position_smoothing_speed = 6.0
-script = ExtResource("4_00xa1")
 
 [node name="Layers" type="Node" parent="."]
 

@@ -1,5 +1,7 @@
 extends Node
 
+signal layer_added
+
 
 @rpc("any_peer", "call_remote", "unreliable_ordered")
 func sync_player(position: Vector2, velocity: Vector2, flip_h: bool) -> void:
@@ -34,7 +36,7 @@ func sync_interaction(player_id: int, interactable_path: NodePath) -> void:
 
 
 func add(scene: PackedScene, layer: Layer, node_name: String = "") -> void:
-	if Sync.is_connected and !is_multiplayer_authority(): breakpoint; return
+	if Sync.is_multiplayer and !is_multiplayer_authority(): breakpoint; return
 	rpc(&"add_scene", scene.resource_path, node_name, layer.id)
 
 

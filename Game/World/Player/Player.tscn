@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://b7nrfn7peb5mq"]
+[gd_scene load_steps=25 format=3 uid="uid://b7nrfn7peb5mq"]
 
 [ext_resource type="Script" path="res://Game/World/Player/Player.gd" id="1_hy8ex"]
 [ext_resource type="Texture2D" uid="uid://c8a36jdurxgs2" path="res://Game/World/Player/Sprites/Dingy2Player.png" id="2_1kjdp"]
 [ext_resource type="Script" path="res://Game/Global/Statemachine/Statemachine.gd" id="4_1jukd"]
 [ext_resource type="Texture2D" uid="uid://blihx4tlsonfa" path="res://Game/World/Player/Sprites/Dingy2PlayerHelm.png" id="4_72g1k"]
 [ext_resource type="Script" path="res://Game/World/Player/SpritePos.gd" id="4_bjk0p"]
+[ext_resource type="Script" path="res://Game/World/Player/PlayerCamera.gd" id="5_57t5e"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Movement.gd" id="5_527tq"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Helming.gd" id="6_ekgyc"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Die.gd" id="7_vvkv8"]
@@ -176,6 +177,13 @@ monitoring = false
 position = Vector2(0, -481)
 shape = SubResource("CapsuleShape2D_6cmj4")
 
+[node name="Camera" type="Camera2D" parent="SpritePos"]
+position = Vector2(0, -482)
+zoom = Vector2(0.4, 0.4)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("5_57t5e")
+
 [node name="Input" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "puppet")]
 script = ExtResource("4_1jukd")
 animation_tree = NodePath("../AnimationTree")
@@ -193,5 +201,6 @@ animation = &"Helming"
 script = ExtResource("7_vvkv8")
 
 [node name="Puppet" type="Node" parent="Input"]
+unique_name_in_owner = true
 script = ExtResource("8_mgrkk")
 animation = &"Idle"

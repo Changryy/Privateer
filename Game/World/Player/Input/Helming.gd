@@ -23,7 +23,7 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func exit() -> void:
-	helm.release()
+	helm.rpc(&"release")
 	await RenderingServer.frame_post_draw
 	owner.flip(true)
 

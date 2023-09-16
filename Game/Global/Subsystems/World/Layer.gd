@@ -13,10 +13,13 @@ func _ready() -> void:
 	assert(!is_instance_valid(World.layers.get(id)), "Layer %s is a duplicate" % id)
 	World.layers[id] = self
 	
-	if !default: return
+	if !default:
+		Relay.layer_added.emit()
+		return
 	
 	assert(!is_instance_valid(World.default_layer), "A default layer already exists")
 	World.default_layer = self
+	Relay.layer_added.emit()
 
 
 

@@ -1,10 +1,12 @@
 extends Node
 
 const VERSION := "0.2.2"
+
+const IP_ADDRESS := "31.45.49.247"
 const PORT: int = 8765
 
 var peer := ENetMultiplayerPeer.new()
-var is_connected := false
+var is_multiplayer := false
 
 
 
@@ -18,15 +20,15 @@ func start_server() -> void:
 	multiplayer.peer_disconnected.connect(player_disconnected)
 	peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
-	await World.load_world(World.get_data())
-	is_connected = true
+	await World.load_world()
+	is_multiplayer = true
 
 func is_server() -> bool:
-	return is_connected and multiplayer.is_server()
+	return is_multiplayer and multiplayer.is_server()
 
 ## 1. [Client] connects to server
 func connect_to_server() -> void:
-	peer.create_client("changry.no", PORT)
+	peer.create_client(IP_ADDRESS, PORT)
 	multiplayer.multiplayer_peer = peer
 
 ## 2. [Server] receives connection
@@ -43,7 +45,7 @@ func connected(server_version: String, world_data: Dictionary) -> void:
 	await World.load_world(world_data)
 	
 	rpc_id(1, &"loaded")
-	is_connected = true
+	is_multiplayer = true
 
 
 ## Client tells [server] it has loaded

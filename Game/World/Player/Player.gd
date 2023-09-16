@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+signal finished_setup
 
 @export var controller: PlayerController
 @export var interaction: Area2D
@@ -10,24 +11,28 @@ var ship: Ship
 @onready var ghost := !name.is_valid_int()
 
 func _ready() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
 	if !name.is_valid_int(): return
 	set_multiplayer_authority(name.to_int())
 	
-	position = World.get_spawnpoint()
 	ship = World.ship
 	
-	if is_instance_valid(ship): ship.contents.append(self)
-	else: assert(false, "Invalid ship")
+	if !is_instance_valid(ship): assert(false, "Invalid ship")
+	else:
+		ship.get_spawnpoint()
+		ship.contents.append(self)
 	
 	assert(not name.to_int() in World.players, "Player exists")
 	World.players[name.to_int()] = self
 	
-	if !is_multiplayer_authority(): return
+	if !is_multiplayer_authority(): return finished_setup.emit()
 	assert(!is_instance_valid(World.player), "Player exists")
 	World.player = self
+	finished_setup.emit()
 
 func is_controlled() -> bool:
-	return !Sync.is_connected or is_multiplayer_authority()
+	return World.player == self
 
 func emit_sync() -> void:
 	if is_multiplayer_authority():
@@ -39,7 +44,9 @@ func sync(pos: Vector2, vel: Vector2, flip_h: bool) -> void:
 	velocity = vel
 	flip(flip_h)
 
-func flip(flip_h: bool) -> void:
+func flip(flip_h: bool, force := false) -> void:
+	if !force and %Puppet.flip_locked: return
+	
 	%Sprite.flip_h = flip_h
 	%Sprite.offset.x = abs(%Sprite.offset.x) * (-1 if flip_h else 1)
 
@@ -55,4 +62,5 @@ func register_interaction(interactable: Interactable) -> void:
 	if !is_instance_valid(controller): breakpoint; return
 	
 	controller.interactables.append(interactable)
+
 

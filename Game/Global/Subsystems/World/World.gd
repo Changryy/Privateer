@@ -31,12 +31,16 @@ func get_data() -> Dictionary:
 	}
 
 func load_world(data: Dictionary = {}) -> void:
-	get_tree().change_scene_to_file("res://Game/World/Main.tscn")
-	await get_tree().process_frame
+	var err := get_tree().change_scene_to_file("res://Game/World/Main.tscn")
+	assert(err == OK)
 	
 	if data.is_empty():
+		await get_tree().process_frame
 		await create_world()
 		return
+	
+	for _i in len(data.layers):
+		await Relay.layer_added
 	
 	for id in data.layers:
 		for node in data.layers[id]:
@@ -62,25 +66,20 @@ func create_world() -> void:
 	loaded.emit()
 
 
-func get_spawnpoint() -> Vector2:
-	if is_instance_valid(ship):
-		return ship.get_spawnpoint()
-	
-	breakpoint
-	return Vector2.ZERO
-
-
 func get_layer(id: int) -> Layer:
 	assert(id in layers, "World does not have layer %s" % id)
 	assert(is_instance_valid(layers[id]), "World has invalid layer")
 	return layers.get(id)
 
 func get_player(id: int) -> Player:
-	assert(id in players, "World does not have player %s" % id)
-	assert(is_instance_valid(players[id]), "World has invalid player")
 	return players.get(id)
 
 
 func spawn_player(id: int = 0) -> void:
 	assert(not id in players, "Player %s already exists" % id)
-	Relay.add(Preloads.player, default_layer, str(id))
+	var layer := default_layer
+	
+	if is_instance_valid(ship):
+		layer = ship.get_parent()
+	
+	Relay.add(Preloads.player, layer, str(id))

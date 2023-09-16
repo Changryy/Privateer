@@ -33,10 +33,7 @@ func physics_process(delta: float) -> void:
 			%Sprite.offset.x = abs(%Sprite.offset.x) * -sign(owner.velocity.x)
 	
 	if is_instance_valid(playback):
-		if walking:
-			playback.travel(&"Walk")
-		else:
-			playback.travel(&"Idle")
+		playback.travel(&"Walk" if walking else &"Idle")
 	
 	owner.move_and_slide()
 	owner.emit_sync()

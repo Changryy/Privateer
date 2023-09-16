@@ -5,24 +5,29 @@ class_name Helm
 @export var pos: Marker2D
 @export var drop_pos: Marker2D
 
-var helming: Player
+var helmsman: Player
 
 
 func can_interact(_player: Player) -> bool:
-	return !is_instance_valid(helming)
+	return !is_instance_valid(helmsman)
 
 func interact(player: Player) -> void:
-	helming = player
+	if !is_instance_valid(player): return
+	
+	helmsman = player
 	if is_instance_valid(pos):
-		helming.global_position = owner.to_local(pos.global_position)
-	helming.set_state(^"Helming", {helm = self})
+		helmsman.global_position = owner.to_local(pos.global_position)
+	helmsman.set_state(^"Helming", {helm = self})
 
 
-
+@rpc("reliable", "any_peer", "call_local")
 func release() -> void:
+	if !is_instance_valid(helmsman): return
+	
 	if is_instance_valid(drop_pos):
-		helming.global_position = owner.to_local(drop_pos.global_position)
-	helming = null
+		helmsman.global_position = owner.to_local(drop_pos.global_position)
+	
+	helmsman = null
 
 
 func current_layer() -> int:
@@ -66,7 +71,27 @@ func move_to_layer(layer_id: int) -> void:
 	owner.reparent(layer)
 	
 	for c in owner.contents:
+		if !is_instance_valid(c): continue
 		c.reparent(layer)
+
+
+func get_data() -> Dictionary:
+	return {
+		helmsman = get_path_to(helmsman) if is_instance_valid(helmsman) else ^""
+	}
+
+func sync(data := {}) -> void:
+	interact(get_node_or_null(data.helmsman))
+
+
+
+
+
+
+
+
+
+
 
 
 
