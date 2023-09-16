@@ -36,7 +36,7 @@ func sync_interaction(player_id: int, interactable_path: NodePath) -> void:
 
 
 func add(scene: PackedScene, layer: Layer, node_name: String = "") -> void:
-	if Sync.is_multiplayer and !is_multiplayer_authority(): breakpoint; return
+	if Sync.is_client(): breakpoint; return
 	rpc(&"add_scene", scene.resource_path, node_name, layer.id)
 
 
@@ -50,7 +50,29 @@ func add_scene(scene_path: String, node_name: String, layer_id: int) -> void:
 	if is_instance_valid(layer): layer.add_child(node)
 
 
+func hit(target: Area2D, data: Dictionary) -> void:
+	if !is_instance_valid(target): breakpoint; return
+	if !target.has_method(&"get_address"): breakpoint; return
+	rpc(&"take_hit", target.get_address(), data)
 
+
+@rpc("reliable", "call_local", "any_peer")
+func take_hit(address: Dictionary, data: Dictionary) -> void:
+	var target_owner: Node
+	var target: Area2D
+	
+	match address.type:
+		&"ship": target_owner = World.get_ship(address.id)
+		&"player": target_owner = World.get_player(address.id)
+	
+	if !is_instance_valid(target_owner): breakpoint; return
+	
+	target = target_owner.get_node_or_null(address.path) as Area2D
+	
+	if !is_instance_valid(target_owner): breakpoint; return
+	if !target.has_method(&"take_hit"): breakpoint; return
+	
+	target.take_hit(data)
 
 
 

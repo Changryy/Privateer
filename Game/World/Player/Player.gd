@@ -7,6 +7,7 @@ signal finished_setup
 @export var interaction: Area2D
 
 var ship: Ship
+var health: float = 100
 
 @onready var ghost := !name.is_valid_int()
 
@@ -63,4 +64,5 @@ func register_interaction(interactable: Interactable) -> void:
 	
 	controller.interactables.append(interactable)
 
-
+func die() -> void:
+	set_state(^"Die")

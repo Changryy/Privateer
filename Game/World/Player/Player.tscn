@@ -1,10 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://b7nrfn7peb5mq"]
+[gd_scene load_steps=26 format=3 uid="uid://b7nrfn7peb5mq"]
 
 [ext_resource type="Script" path="res://Game/World/Player/Player.gd" id="1_hy8ex"]
 [ext_resource type="Texture2D" uid="uid://c8a36jdurxgs2" path="res://Game/World/Player/Sprites/Dingy2Player.png" id="2_1kjdp"]
 [ext_resource type="Script" path="res://Game/Global/Statemachine/Statemachine.gd" id="4_1jukd"]
 [ext_resource type="Texture2D" uid="uid://blihx4tlsonfa" path="res://Game/World/Player/Sprites/Dingy2PlayerHelm.png" id="4_72g1k"]
 [ext_resource type="Script" path="res://Game/World/Player/SpritePos.gd" id="4_bjk0p"]
+[ext_resource type="Script" path="res://Game/World/Player/Hitbox.gd" id="5_5oasc"]
 [ext_resource type="Script" path="res://Game/World/Player/PlayerCamera.gd" id="5_57t5e"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Movement.gd" id="5_527tq"]
 [ext_resource type="Script" path="res://Game/World/Player/Input/Helming.gd" id="6_ekgyc"]
@@ -172,6 +173,7 @@ offset = Vector2(150, -519)
 collision_layer = 12
 collision_mask = 0
 monitoring = false
+script = ExtResource("5_5oasc")
 
 [node name="Hitbox" type="CollisionShape2D" parent="SpritePos/Interaction"]
 position = Vector2(0, -481)

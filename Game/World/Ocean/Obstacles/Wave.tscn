@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjss5j4lss528"]
+
+[ext_resource type="Script" path="res://Game/World/Ocean/Obstacles/Obstacle.gd" id="1_7oepc"]
+[ext_resource type="Texture2D" uid="uid://dqsgl7b4ohmgo" path="res://Game/World/Ocean/PrivateersConceptWater.png" id="2_jh5fg"]
+
+[node name="Wave" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_7oepc")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -217.84)
+scale = Vector2(2, 2)
+texture = ExtResource("2_jh5fg")
+region_enabled = true
+region_rect = Rect2(96.0071, 325.426, 307.356, 378.11)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -217.84)
+polygon = PackedVector2Array(-195, -142.16, -198, -227.16, -136, -313.16, -39, -354.16, 53, -366.16, 172, -317.16, 252, -224.16, 291, -105.16, 293, 33.84, 280, 124.84, 230, 300.84, -49, 277.84, -148, 130.84, -57, 68.84, -3, -38.16, -11, -118.16, -69, -187.16)

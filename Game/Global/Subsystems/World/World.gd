@@ -2,6 +2,7 @@ extends Node
 
 signal interaction(interacter: Player)
 signal loaded
+signal entered_ship(ship: Ship)
 
 @export var default_ship: PackedScene
 var default_layer: Layer
@@ -10,7 +11,7 @@ var player: Player
 var ship: Ship
 var players := {}
 var layers := {}
-
+var ships := {}
 
 
 func get_data() -> Dictionary:
@@ -50,6 +51,7 @@ func load_world(data: Dictionary = {}) -> void:
 	
 	ship = get_node_or_null(data.ship) as Ship
 	assert(is_instance_valid(ship), "Invalid ship")
+	entered_ship.emit(ship)
 	loaded.emit()
 
 
@@ -60,6 +62,7 @@ func create_world() -> void:
 	for c in default_layer.get_children():
 		if c is Ship:
 			ship = c
+			entered_ship.emit(ship)
 			break
 	
 	assert(is_instance_valid(ship), "Invalid ship")
@@ -74,8 +77,12 @@ func get_layer(id: int) -> Layer:
 func get_player(id: int) -> Player:
 	return players.get(id)
 
+func get_ship(id: int) -> Ship:
+	assert(id in ships, "World does not have ship %s" % id)
+	assert(is_instance_valid(ships[id]), "World has invalid ship")
+	return ships.get(id)
 
-func spawn_player(id: int = 0) -> void:
+func spawn_player(id: int = 1) -> void:
 	assert(not id in players, "Player %s already exists" % id)
 	var layer := default_layer
 	

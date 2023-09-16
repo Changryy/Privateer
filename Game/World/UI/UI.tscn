@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://nyejy78aqptt"]
+
+[ext_resource type="Script" path="res://Game/World/UI/UI.gd" id="1_4mvpt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xqww"]
+bg_color = Color(0, 0, 0, 0.0823529)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 0.156863)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6r86"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 8
+border_width_top = 8
+border_color = Color(1, 0.486275, 0.486275, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_4mvpt")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.5
+offset_right = 30.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+
+[node name="Health" type="ProgressBar" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_0xqww")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f6r86")
+value = 50.0
+fill_mode = 3
+show_percentage = false

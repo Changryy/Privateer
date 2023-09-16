@@ -11,6 +11,7 @@ func _ready() -> void:
 
 
 func get_layer(layer_name: String) -> int:
+	assert(layer_name in layers, "Layer '%s' does not exist" % layer_name)
 	return layers.get(layer_name, 0)
 
 

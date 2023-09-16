@@ -1,12 +1,19 @@
 extends Node
 
+enum {
+	NONE,
+	SINGLEPLAYER,
+	MULTIPLAYER
+}
+
+
 const VERSION := "0.2.2"
 
 const IP_ADDRESS := "31.45.49.247"
 const PORT: int = 8765
 
 var peer := ENetMultiplayerPeer.new()
-var is_multiplayer := false
+var connection := NONE
 
 
 
@@ -21,10 +28,7 @@ func start_server() -> void:
 	peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
 	await World.load_world()
-	is_multiplayer = true
-
-func is_server() -> bool:
-	return is_multiplayer and multiplayer.is_server()
+	connection = MULTIPLAYER
 
 ## 1. [Client] connects to server
 func connect_to_server() -> void:
@@ -45,7 +49,7 @@ func connected(server_version: String, world_data: Dictionary) -> void:
 	await World.load_world(world_data)
 	
 	rpc_id(1, &"loaded")
-	is_multiplayer = true
+	connection = MULTIPLAYER
 
 
 ## Client tells [server] it has loaded
@@ -66,8 +70,10 @@ func singleplayer() -> void:
 	await World.load_world()
 	World.spawn_player()
 
-
-
+func is_multiplayer() -> bool: return connection == MULTIPLAYER
+func is_singleplayer() -> bool: return connection == SINGLEPLAYER
+func is_server() -> bool: return is_multiplayer() and multiplayer.is_server()
+func is_client() -> bool: return is_multiplayer() and !multiplayer.is_server()
 
 
 

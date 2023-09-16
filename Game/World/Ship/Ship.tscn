@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bn5yn84yfo7xf"]
+[gd_scene load_steps=8 format=3 uid="uid://bn5yn84yfo7xf"]
 
 [ext_resource type="Script" path="res://Game/World/Ship/Ship.gd" id="1_03lvu"]
 [ext_resource type="Texture2D" uid="uid://dh2g4alt6akhp" path="res://Game/World/Ship/Dingy2.png" id="2_utcbh"]
 [ext_resource type="Script" path="res://Game/World/Interactables/Helm.gd" id="3_aewmn"]
+[ext_resource type="Script" path="res://Game/World/Ship/Damagable.gd" id="4_sstih"]
 
 [sub_resource type="Animation" id="Animation_q54v6"]
 length = 0.001
@@ -62,10 +63,11 @@ _data = {
 "Test": SubResource("Animation_olw34")
 }
 
-[node name="Ship" type="Node2D"]
+[node name="Ship" type="Node2D" node_paths=PackedStringArray("ground")]
 z_index = 10
 position = Vector2(0, -18)
 script = ExtResource("1_03lvu")
+ground = NodePath("Ground")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(25, -1439)
@@ -87,11 +89,11 @@ position = Vector2(-9, 513)
 [node name="DropPos" type="Marker2D" parent="Helm"]
 position = Vector2(98, 620)
 
-[node name="Hull" type="StaticBody2D" parent="."]
+[node name="Ground" type="StaticBody2D" parent="."]
 top_level = true
 collision_layer = 2
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hull"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground"]
 position = Vector2(0, 123)
 polygon = PackedVector2Array(-1576, -559, -1576, -357, -1468, -263, -1410, -171, -1374, -51, -1122, 99, -858, 193, 1, 262, 403, 267, 780, 243, 1082, 147, 1351, -19, 1612, -266, 1827, -553, 1572, -313, 1310, -65, 1065, 90, 769, 179, 386, 205, 1, 207, -855, 138, -1102, 54, -1336, -90, -1361, -197, -1411, -293, -1523, -381)
 
@@ -101,3 +103,12 @@ speed_scale = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_0ipfr")
 }
+
+[node name="Hull" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_sstih")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hull"]
+polygon = PackedVector2Array(-1568, -234, -1428, -83, -1387, 61, -1100, 238, -790, 340, 524, 397, 935, 329, 1332, 129, 1607, -136, 1830, -434, 1498, -313, 799, -162, 37, -162, -749, -249, -1568, -430)

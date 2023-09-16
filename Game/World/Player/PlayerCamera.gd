@@ -12,7 +12,7 @@ var static_offset := position
 
 func _ready() -> void:
 	await owner.finished_setup
-	enabled = owner == World.player
+	enabled = owner.is_controlled()
 	if enabled: make_current()
 
 func _process(_delta: float) -> void:

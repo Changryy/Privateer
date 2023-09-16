@@ -46,7 +46,7 @@ func physics_process(delta: float) -> void:
 
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"): jump()
-	elif event.is_action_pressed("interact"): interact()
+	elif event.is_action_pressed("interact"):interact()
 
 
 func jump():

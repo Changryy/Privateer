@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://btdviq7xbj23v"]
+
+[ext_resource type="Script" path="res://Game/World/Ocean/Obstacles/Obstacle.gd" id="1_1i5e5"]
+[ext_resource type="Texture2D" uid="uid://dqsgl7b4ohmgo" path="res://Game/World/Ocean/PrivateersConceptWater.png" id="2_myfdd"]
+
+[node name="Barrel" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_1i5e5")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -81.4)
+scale = Vector2(2, 2)
+texture = ExtResource("2_myfdd")
+region_enabled = true
+region_rect = Rect2(420.771, 494.06, 208.319, 209.002)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -81.4)
+polygon = PackedVector2Array(-2, -201, -59, -152, -111, -91, -153, -3, -150, 167, 26, 171, 72, 106, 124, 16, 155, -101)
