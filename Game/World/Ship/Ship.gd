@@ -3,6 +3,7 @@ class_name Ship
 
 @export var ground: StaticBody2D
 @export var height_offset: float = 50
+@export var animation: AnimationPlayer
 
 var contents: Array[Node2D] = []
 
@@ -23,7 +24,10 @@ func _enter_tree() -> void:
 	if !is_instance_valid(get_parent()): breakpoint; return
 	if not get_parent() is Layer: breakpoint; return
 	layer_offset = -get_parent().height
-	%Ship.play("Test")
+	animation.play("Test")
+	
+	if !Sync.in_game(): await World.loaded
+	if Sync.is_client(): rpc_id(1, &"request_sync")
 
 func _ready() -> void:
 	ground.set_process(false)
@@ -55,8 +59,14 @@ func sink() -> void:
 		if !is_instance_valid(c): continue
 		if c.has_method(&"die"):
 			c.die()
-	
 
+@rpc("reliable", "any_peer", "call_remote")
+func request_sync() -> void:
+	rpc_id(multiplayer.get_remote_sender_id(), &"sync_rotation", animation.current_animation_position)
+
+@rpc("reliable", "authority", "call_remote")
+func sync_rotation(rot: float) -> void:
+	animation.seek(rot)
 
 
 

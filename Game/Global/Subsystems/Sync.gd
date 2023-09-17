@@ -86,6 +86,6 @@ func is_multiplayer() -> bool: return connection == MULTIPLAYER
 func is_singleplayer() -> bool: return connection == SINGLEPLAYER
 func is_server() -> bool: return is_multiplayer() and multiplayer.is_server()
 func is_client() -> bool: return is_multiplayer() and !multiplayer.is_server()
-
+func in_game() -> bool: return connection != NONE
 
 

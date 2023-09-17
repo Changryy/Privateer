@@ -1,71 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://ydu4iqbf4i7i"]
+[gd_scene load_steps=9 format=3 uid="uid://ydu4iqbf4i7i"]
 
 [ext_resource type="Script" path="res://Game/World/Root.gd" id="1_rlrb3"]
-[ext_resource type="Script" path="res://Game/Global/Subsystems/World/ObstacleSpawner.gd" id="2_gh8vo"]
+[ext_resource type="Script" path="res://Game/World/Ocean/Obstacles/ObstacleSpawner.gd" id="2_gh8vo"]
 [ext_resource type="PackedScene" uid="uid://cb0nhj1ojfmf5" path="res://Game/World/Ocean/Ocean.tscn" id="2_mueq4"]
-[ext_resource type="Script" path="res://Game/Global/Subsystems/World/Layer.gd" id="3_732wu"]
-[ext_resource type="PackedScene" uid="uid://d33tqitrm8hkq" path="res://Game/World/Ocean/Obstacles/Rock.tscn" id="3_v1kmp"]
-[ext_resource type="PackedScene" uid="uid://btdviq7xbj23v" path="res://Game/World/Ocean/Obstacles/Barrel.tscn" id="3_vuuf1"]
-[ext_resource type="PackedScene" uid="uid://cjss5j4lss528" path="res://Game/World/Ocean/Obstacles/Wave.tscn" id="5_ic3ux"]
+[ext_resource type="Script" path="res://Game/World/Ocean/Layer.gd" id="3_732wu"]
+[ext_resource type="PackedScene" uid="uid://d33tqitrm8hkq" path="res://Game/World/Ocean/Obstacles/Objects/Rock.tscn" id="3_v1kmp"]
+[ext_resource type="PackedScene" uid="uid://btdviq7xbj23v" path="res://Game/World/Ocean/Obstacles/Objects/Barrel.tscn" id="3_vuuf1"]
+[ext_resource type="PackedScene" uid="uid://cjss5j4lss528" path="res://Game/World/Ocean/Obstacles/Objects/Wave.tscn" id="5_ic3ux"]
 [ext_resource type="PackedScene" uid="uid://nyejy78aqptt" path="res://Game/World/UI/UI.tscn" id="6_kkx1y"]
-
-[sub_resource type="Animation" id="Animation_q54v6"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:wave_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_olw34"]
-resource_name = "Test"
-length = 1.5
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:wave_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(3, 0, 0, 0),
-"points": PackedFloat32Array(-18, -0.0911303, 3, 0.0911303, -3, -25, -0.106674, 2, 0.212282, 0, -7, -0.213587, -2, 0.113913, -1, -18, -0.141589, 6, 1.06304, -141),
-"times": PackedFloat32Array(0, 0.4, 1.03091, 1.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-1, -0.25, 0, 0.28763, 0, 1, -0.280248, 0, 0.280248, 0, -1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.6387, 1.5)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ipfr"]
-_data = {
-"RESET": SubResource("Animation_q54v6"),
-"Test": SubResource("Animation_olw34")
-}
 
 [node name="Root" type="Node2D"]
 script = ExtResource("1_rlrb3")
@@ -92,34 +34,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.690719, 0.885804, 1, 1)
 
-[node name="ShipMover" type="RemoteTransform2D" parent="."]
-unique_name_in_owner = true
-update_scale = false
-
-[node name="Ship" type="AnimationPlayer" parent="ShipMover"]
-unique_name_in_owner = true
-speed_scale = 0.8
-libraries = {
-"": SubResource("AnimationLibrary_0ipfr")
-}
-
 [node name="Layers" type="Node" parent="."]
 
-[node name="Enemies" type="Node" parent="Layers"]
-
-[node name="Layer-3" type="CanvasLayer" parent="Layers/Enemies"]
-script = ExtResource("3_732wu")
-id = -3
-
-[node name="Layer-2" type="CanvasLayer" parent="Layers/Enemies"]
-script = ExtResource("3_732wu")
-id = -2
-
-[node name="Layer-1" type="CanvasLayer" parent="Layers/Enemies"]
-script = ExtResource("3_732wu")
-id = -1
-
-[node name="Islands" type="CanvasLayer" parent="Layers"]
+[node name="Enemy" type="CanvasLayer" parent="Layers"]
 script = ExtResource("3_732wu")
 
 [node name="Player" type="Node" parent="Layers"]

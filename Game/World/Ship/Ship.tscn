@@ -63,11 +63,12 @@ _data = {
 "Test": SubResource("Animation_olw34")
 }
 
-[node name="Ship" type="Node2D" node_paths=PackedStringArray("ground")]
+[node name="Ship" type="Node2D" node_paths=PackedStringArray("ground", "animation")]
 z_index = 10
 position = Vector2(0, -18)
 script = ExtResource("1_03lvu")
 ground = NodePath("Ground")
+animation = NodePath("Ship")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(25, -1439)
