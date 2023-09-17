@@ -1,4 +1,4 @@
-extends Node
+extends Subsystem
 
 signal interaction(interacter: Player)
 signal loaded
@@ -52,8 +52,11 @@ func load_world(data: Dictionary = {}) -> void:
 	ship = get_node_or_null(data.ship) as Ship
 	assert(is_instance_valid(ship), "Invalid ship")
 	entered_ship.emit(ship)
-	loaded.emit()
+	finished_loading()
 
+func finished_loading() -> void:
+	await get_tree().process_frame
+	loaded.emit()
 
 func create_world() -> void:
 	Relay.add(default_ship, default_layer)
@@ -66,7 +69,7 @@ func create_world() -> void:
 			break
 	
 	assert(is_instance_valid(ship), "Invalid ship")
-	loaded.emit()
+	finished_loading()
 
 
 func get_layer(id: int) -> Layer:
@@ -90,3 +93,12 @@ func spawn_player(id: int = 1) -> void:
 		layer = ship.get_parent()
 	
 	Relay.add(Preloads.player, layer, str(id))
+
+func reset() -> void:
+	player = null
+	ship = null
+	players.clear()
+	layers.clear()
+	ships.clear()
+
+

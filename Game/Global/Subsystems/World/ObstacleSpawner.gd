@@ -5,7 +5,6 @@ extends Node
 
 func _ready() -> void:
 	await World.loaded
-	await get_tree().process_frame
 	if Sync.is_client(): return
 	
 	spawn_obstacle()

@@ -1,4 +1,4 @@
-extends Node
+extends Subsystem
 
 enum {
 	NONE,
@@ -12,12 +12,17 @@ const VERSION := "0.2.2"
 const IP_ADDRESS := "31.45.49.247"
 const PORT: int = 8765
 
+
+signal player_count_changed
+
+
 var peer := ENetMultiplayerPeer.new()
 var connection := NONE
 
 
 
 func _ready() -> void:
+	super()
 	if "--server" in OS.get_cmdline_args(): start_server()
 	elif OS.has_feature("server"): start_server()
 
@@ -43,8 +48,7 @@ func player_connected(id: int) -> void:
 @rpc("call_remote", "authority", "reliable")
 func connected(server_version: String, world_data: Dictionary) -> void:
 	if server_version != VERSION:
-		peer.close()
-		return
+		return quit()
 	
 	await World.load_world(world_data)
 	
@@ -56,19 +60,27 @@ func connected(server_version: String, world_data: Dictionary) -> void:
 @rpc("call_remote", "any_peer", "reliable")
 func loaded() -> void:
 	World.spawn_player(multiplayer.get_remote_sender_id())
+	player_count_changed.emit()
 
 
 func player_disconnected(id: int) -> void:
 	var player := World.get_player(id) as Player
+	if !is_instance_valid(player): breakpoint; return
 	
-	if is_instance_valid(player):
-		player.queue_free()
-
+	World.players.erase(id)
+	player.queue_free()
+	player_count_changed.emit()
 
 
 func singleplayer() -> void:
 	await World.load_world()
 	World.spawn_player()
+
+func quit() -> void:
+	if Sync.is_client(): peer.close()
+	connection = NONE
+	World.reset()
+
 
 func is_multiplayer() -> bool: return connection == MULTIPLAYER
 func is_singleplayer() -> bool: return connection == SINGLEPLAYER

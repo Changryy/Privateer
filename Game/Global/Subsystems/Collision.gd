@@ -1,9 +1,10 @@
-extends Node
+extends Subsystem
 
 
 var layers := {}
 
 func _ready() -> void:
+	super()
 	for i in 32:
 		var layer_name: String = ProjectSettings.get_setting("layer_names/2d_physics/layer_%s" % (i + 1))
 		if !layer_name: continue

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://nyejy78aqptt"]
+[gd_scene load_steps=5 format=3 uid="uid://nyejy78aqptt"]
 
 [ext_resource type="Script" path="res://Game/World/UI/UI.gd" id="1_4mvpt"]
 
@@ -26,7 +26,15 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyiwy"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
 [node name="UI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,3 +65,34 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_f6r86")
 value = 50.0
 fill_mode = 3
 show_percentage = false
+
+[node name="Menu" type="PopupPanel" parent="."]
+unique_name_in_owner = true
+disable_3d = true
+transparent_bg = true
+size = Vector2i(350, 200)
+visible = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_gyiwy")
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu"]
+offset_right = 350.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Resume" type="Button" parent="Menu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "Resume"
+
+[node name="MainMenu" type="Button" parent="Menu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"MainMenuButton"
+text = "Main Menu"
+
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/Resume" to="." method="resume_pressed"]
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/MainMenu" to="." method="main_menu_pressed"]
