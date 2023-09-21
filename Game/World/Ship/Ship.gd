@@ -5,6 +5,7 @@ class_name Ship
 @export var height_offset: float = 50
 @export var animation: AnimationPlayer
 
+
 var contents: Array[Node2D] = []
 
 var layer_offset: float = 0
@@ -67,7 +68,6 @@ func request_sync() -> void:
 @rpc("reliable", "authority", "call_remote")
 func sync_rotation(rot: float) -> void:
 	animation.seek(rot)
-
 
 
 

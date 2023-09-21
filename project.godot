@@ -99,3 +99,7 @@ pause={
 2d_physics/layer_2="Ground"
 2d_physics/layer_3="Interaction"
 2d_physics/layer_4="Damagable"
+
+[rendering]
+
+viewport/transparent_background=true

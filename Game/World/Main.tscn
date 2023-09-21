@@ -38,6 +38,10 @@ color = Color(0.690719, 0.885804, 1, 1)
 
 [node name="Enemy" type="CanvasLayer" parent="Layers"]
 script = ExtResource("3_732wu")
+id = -1
+height = 800
+
+[node name="Ocean4" parent="Layers/Enemy" instance=ExtResource("2_mueq4")]
 
 [node name="Player" type="Node" parent="Layers"]
 

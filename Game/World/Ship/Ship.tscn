@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn5yn84yfo7xf"]
+[gd_scene load_steps=9 format=3 uid="uid://bn5yn84yfo7xf"]
 
 [ext_resource type="Script" path="res://Game/World/Ship/Ship.gd" id="1_03lvu"]
+[ext_resource type="Script" path="res://Game/World/Ship/Scalable.gd" id="2_hkweo"]
 [ext_resource type="Texture2D" uid="uid://dh2g4alt6akhp" path="res://Game/World/Ship/Dingy2.png" id="2_utcbh"]
 [ext_resource type="Script" path="res://Game/World/Interactables/Helm.gd" id="3_aewmn"]
 [ext_resource type="Script" path="res://Game/World/Ship/Damagable.gd" id="4_sstih"]
@@ -69,28 +70,32 @@ position = Vector2(0, -18)
 script = ExtResource("1_03lvu")
 ground = NodePath("Ground")
 animation = NodePath("Ship")
+metadata/_edit_vertical_guides_ = []
+
+[node name="Scalable" type="Node" parent="."]
+script = ExtResource("2_hkweo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(25, -1439)
 texture = ExtResource("2_utcbh")
 
 [node name="Helm" type="Area2D" parent="." node_paths=PackedStringArray("pos", "drop_pos")]
-position = Vector2(-1333, -543)
 collision_layer = 12
 script = ExtResource("3_aewmn")
 pos = NodePath("HelmPos")
 drop_pos = NodePath("DropPos")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Helm"]
-polygon = PackedVector2Array(-152, -75, 107, -3, 138, 61, 58, 41, -82, 69, -106, 20, -152, 22, -196, -9, -200, -44)
+polygon = PackedVector2Array(-1485, -618, -1226, -546, -1195, -482, -1275, -502, -1415, -474, -1439, -523, -1485, -521, -1529, -552, -1533, -587)
 
 [node name="HelmPos" type="Marker2D" parent="Helm"]
-position = Vector2(-9, 513)
+position = Vector2(-1342, -30)
 
 [node name="DropPos" type="Marker2D" parent="Helm"]
-position = Vector2(98, 620)
+position = Vector2(-1235, 77)
 
 [node name="Ground" type="StaticBody2D" parent="."]
+visible = false
 top_level = true
 collision_layer = 2
 
@@ -113,3 +118,5 @@ script = ExtResource("4_sstih")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hull"]
 polygon = PackedVector2Array(-1568, -234, -1428, -83, -1387, 61, -1100, 238, -790, 340, 524, 397, 935, 329, 1332, 129, 1607, -136, 1830, -434, 1498, -313, 799, -162, 37, -162, -749, -249, -1568, -430)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
